@@ -1,8 +1,10 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { ChevronLeft, ChevronRight, Clock, Globe, Calendar, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "@/components/ui/use-toast";
 
 const timeSlots = ["10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "02:00 PM", "02:30 PM", "03:00 PM", "03:30 PM"];
 
@@ -11,6 +13,7 @@ const getFirstDayOfMonth = (year: number, month: number) => new Date(year, month
 
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const adminEmails = "Hamzaareeb048@gmail.com, arhamharoonansari70@gmail.com";
 
 const BookingSection = () => {
   const today = new Date();
@@ -25,6 +28,7 @@ const BookingSection = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [agreeComms, setAgreeComms] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   const daysInMonth = getDaysInMonth(currentYear, currentMonth);
   const firstDay = getFirstDayOfMonth(currentYear, currentMonth);
@@ -83,11 +87,101 @@ const BookingSection = () => {
   };
 
   const handleConfirm = () => {
+    if (!selectedDate || !selectedTime) {
+      toast({ title: "Select a date and time", description: "Pick a date and time slot to continue." });
+      return;
+    }
     setStep("details");
   };
 
   const handleBack = () => {
     setStep("calendar");
+  };
+
+  const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+
+  const handleSubmit = async () => {
+    if (!selectedDate || !selectedTime) {
+      toast({ title: "Select a date and time", description: "Pick a date and time slot to continue." });
+      setStep("calendar");
+      return;
+    }
+    if (!fullName.trim() || !email.trim() || !phone.trim()) {
+      toast({ title: "Missing details", description: "Please add your name, email, and phone." });
+      return;
+    }
+    if (!isValidEmail(email)) {
+      toast({ title: "Invalid email", description: "Enter a valid email address to receive confirmation." });
+      return;
+    }
+    if (!agreeComms) {
+      toast({ title: "Consent required", description: "Please agree to receive messages to confirm." });
+      return;
+    }
+
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      toast({
+        title: "Email not configured",
+        description: "Add EmailJS keys to .env.local before confirming bookings.",
+      });
+      return;
+    }
+
+    const bookingDate = `${monthNames[currentMonth]} ${selectedDate}, ${currentYear}`;
+    const payload = {
+      full_name: fullName.trim(),
+      user_email: email.trim(),
+      phone: phone.trim(),
+      booking_date: bookingDate,
+      booking_time: selectedTime,
+      booking_date_time: formatSelectedDateTime(),
+      time_zone: "Asia/Karachi (GMT+5)",
+      consent: agreeComms ? "Yes" : "No",
+      reply_to: email.trim(),
+    };
+
+    setIsSending(true);
+    try {
+      await Promise.all([
+        emailjs.send(
+          serviceId,
+          templateId,
+          { ...payload, to_email: adminEmails },
+          publicKey,
+        ),
+        emailjs.send(
+          serviceId,
+          templateId,
+          { ...payload, to_email: email.trim() },
+          publicKey,
+        ),
+      ]);
+
+      toast({
+        title: "Booking confirmed",
+        description: "We sent a confirmation email. Talk soon!",
+      });
+
+      setStep("calendar");
+      setSelectedDate(null);
+      setSelectedTime(null);
+      setFullName("");
+      setEmail("");
+      setPhone("");
+      setAgreeComms(false);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast({
+        title: "Email failed",
+        description: "We could not send your booking email. Please try again.",
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -281,9 +375,11 @@ const BookingSection = () => {
 
                   {/* Submit */}
                   <button
+                    onClick={handleSubmit}
+                    disabled={isSending}
                     className="w-full mt-8 bg-secondary text-secondary-foreground py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity text-base"
                   >
-                    Book Your Free Discovery Call
+                    {isSending ? "Sending..." : "Book Your Free Discovery Call"}
                   </button>
                 </div>
               )}

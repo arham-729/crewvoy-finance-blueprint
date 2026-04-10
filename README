@@ -1,0 +1,7 @@
+To run :
+
+crewvoy-finance-blueprint
+
+
+npm install
+npm run dev
