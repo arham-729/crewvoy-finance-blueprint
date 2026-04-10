@@ -24,10 +24,7 @@ const BookingSection = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [website, setWebsite] = useState("");
-  const [teamSize, setTeamSize] = useState("");
-  const [revenue, setRevenue] = useState("");
-  const [agreeTexts, setAgreeTexts] = useState(false);
+  const [agreeComms, setAgreeComms] = useState(false);
 
   const daysInMonth = getDaysInMonth(currentYear, currentMonth);
   const firstDay = getFirstDayOfMonth(currentYear, currentMonth);
@@ -256,7 +253,7 @@ const BookingSection = () => {
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 sm:col-span-2">
                       <Label htmlFor="phone">Phone <span className="text-destructive">*</span></Label>
                       <Input
                         id="phone"
@@ -266,59 +263,18 @@ const BookingSection = () => {
                         onChange={(e) => setPhone(e.target.value)}
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="website">Website <span className="text-destructive">*</span></Label>
-                      <Input
-                        id="website"
-                        placeholder="Your website"
-                        value={website}
-                        onChange={(e) => setWebsite(e.target.value)}
-                      />
-                    </div>
-
-                    {/* Team Size */}
-                    <div className="space-y-3">
-                      <Label>Team size <span className="text-destructive">*</span></Label>
-                      <div className="space-y-2">
-                        {["1-5", "5-15", "15+"].map((size) => (
-                          <label key={size} className="flex items-center gap-2 cursor-pointer">
-                            <Checkbox
-                              checked={teamSize === size}
-                              onCheckedChange={() => setTeamSize(size)}
-                            />
-                            <span className="text-sm text-foreground">{size}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Revenue */}
-                    <div className="space-y-3">
-                      <Label>Company's monthly recurring revenue <span className="text-destructive">*</span></Label>
-                      <div className="space-y-2">
-                        {["Under $10k", "$10k-$30k", "$30k+"].map((rev) => (
-                          <label key={rev} className="flex items-center gap-2 cursor-pointer">
-                            <Checkbox
-                              checked={revenue === rev}
-                              onCheckedChange={() => setRevenue(rev)}
-                            />
-                            <span className="text-sm text-foreground">{rev}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
                   </div>
 
                   {/* Agreement */}
                   <div className="mt-6">
                     <label className="flex items-start gap-3 cursor-pointer">
                       <Checkbox
-                        checked={agreeTexts}
-                        onCheckedChange={(checked) => setAgreeTexts(checked === true)}
+                        checked={agreeComms}
+                        onCheckedChange={(checked) => setAgreeComms(checked === true)}
                         className="mt-0.5"
                       />
                       <span className="text-sm text-muted-foreground">
-                        I agree to receive text messages from the business. Don't worry, we won't spam you.
+                        I agree to receive text messages and emails. Don't worry, we won't spam you.
                       </span>
                     </label>
                   </div>
