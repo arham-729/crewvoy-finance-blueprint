@@ -24,10 +24,7 @@ const BookingSection = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [website, setWebsite] = useState("");
-  const [teamSize, setTeamSize] = useState("");
-  const [revenue, setRevenue] = useState("");
-  const [agreeTexts, setAgreeTexts] = useState(false);
+  const [agreeComms, setAgreeComms] = useState(false);
 
   const daysInMonth = getDaysInMonth(currentYear, currentMonth);
   const firstDay = getFirstDayOfMonth(currentYear, currentMonth);
