@@ -117,3 +117,59 @@ export const ScrollProgress = () => {
     />
   );
 };
+
+/* ---------- Animated text reveal line by line ---------- */
+export const TextReveal = ({ text, className = "" }: { text: string; className?: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  
+  return (
+    <div ref={ref} className={className}>
+      {text.split(" ").map((word, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+          className="inline-block mr-[0.25em]"
+        >
+          {word}
+        </motion.span>
+      ))}
+    </div>
+  );
+};
+
+/* ---------- Animated blur-in reveal ---------- */
+export const BlurReveal = ({ 
+  children, 
+  delay = 0, 
+  className = "" 
+}: { 
+  children: ReactNode; 
+  delay?: number; 
+  className?: string 
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, filter: "blur(10px)" }}
+      animate={inView ? { opacity: 1, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
+      transition={{ duration: 0.8, delay, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+/* ---------- Floating animation hook ---------- */
+export const useFloatingAnimation = (intensity = 20, duration = 4) => {
+  return {
+    animate: { y: [0, -intensity, 0] },
+    transition: { repeat: Infinity, duration, ease: "easeInOut" }
+  };
+};

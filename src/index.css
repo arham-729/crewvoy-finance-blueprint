@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -18,36 +18,39 @@
     --primary: 0 0% 100%;
     --primary-foreground: 220 30% 5%;
 
-    --secondary: 188 95% 55%;
+    --secondary: 180 98% 52%;
     --secondary-foreground: 220 30% 5%;
 
     --muted: 220 20% 12%;
     --muted-foreground: 220 10% 65%;
 
-    --accent: 188 95% 55%;
+    --accent: 180 98% 52%;
     --accent-foreground: 220 30% 5%;
+
+    --accent-coral: 15 100% 58%;
+    --accent-coral-foreground: 220 30% 5%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 220 20% 15%;
     --input: 220 20% 15%;
-    --ring: 188 95% 55%;
+    --ring: 180 98% 52%;
 
     --radius: 0.5rem;
 
     --hero-bg: 220 35% 4%;
     --hero-foreground: 0 0% 98%;
-    --hero-accent: 188 95% 55%;
+    --hero-accent: 180 98% 52%;
 
     --sidebar-background: 220 25% 8%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 188 95% 55%;
+    --sidebar-primary: 180 98% 52%;
     --sidebar-primary-foreground: 220 30% 5%;
     --sidebar-accent: 220 20% 12%;
     --sidebar-accent-foreground: 0 0% 98%;
     --sidebar-border: 220 20% 15%;
-    --sidebar-ring: 188 95% 55%;
+    --sidebar-ring: 180 98% 52%;
   }
 }
 
@@ -67,20 +70,173 @@
 @layer utilities {
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--secondary)), hsl(220 90% 70%));
+    background-image: linear-gradient(135deg, hsl(180 98% 52%), hsl(220 90% 70%), hsl(270 85% 65%));
   }
+  .text-gradient-warm {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg, hsl(180 98% 52%), hsl(45 100% 60%), hsl(25 100% 65%));
+  }
+  .text-gradient-aurora {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(120deg, hsl(180 98% 52%), hsl(240 90% 65%), hsl(300 85% 60%));
+  }
+
+  /* Modern gradient letter effect - like systemsltd.com */
+  .text-gradient-letters {
+    background: linear-gradient(90deg, 
+      hsl(270 85% 65%) 0%, 
+      hsl(240 90% 65%) 15%, 
+      hsl(180 98% 52%) 30%, 
+      hsl(45 100% 60%) 50%, 
+      hsl(25 100% 65%) 70%, 
+      hsl(300 85% 60%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 8s ease infinite;
+    background-size: 200% 100%;
+  }
+
   .hero-gradient {
-    background: radial-gradient(ellipse at top, hsl(220 35% 12%), hsl(var(--hero-bg)));
+    background: radial-gradient(ellipse at 50% -20%, hsl(180 98% 52% / 0.15), transparent 50%), 
+                radial-gradient(ellipse at 100% 50%, hsl(220 95% 55% / 0.1), transparent 50%),
+                linear-gradient(180deg, hsl(220 35% 8%), hsl(220 35% 4%));
   }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-effect-dark {
+    background: rgba(14, 20, 30, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(52, 211, 153, 0.1);
+  }
+
+  /* Premium overlay for images */
+  .overlay-premium {
+    position: relative;
+    background: linear-gradient(135deg, rgba(14, 20, 30, 0.6), rgba(14, 20, 30, 0.3));
+  }
+
+  .overlay-premium::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(52, 211, 153, 0.1), transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Coral/Orange accent button */
+  .btn-coral {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm relative;
+    background: linear-gradient(135deg, hsl(15 100% 58%), hsl(12 100% 55%));
+    color: white;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    box-shadow: 0 4px 15px rgba(255, 102, 51, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid hsl(15 100% 62% / 0.5);
+  }
+
+  .btn-coral::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .btn-coral:hover::before {
+    opacity: 1;
+  }
+
+  .btn-coral:hover {
+    background: linear-gradient(135deg, hsl(15 100% 52%), hsl(12 100% 50%));
+    box-shadow: 0 12px 35px rgba(255, 102, 51, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+  }
+
+  .btn-coral:active {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 102, 51, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* Secondary button - outline style */
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm relative;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    border: 1.5px solid hsl(180 98% 52% / 0.4);
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: hsl(180 98% 52% / 0.8);
+    box-shadow: 0 0 30px hsl(180 98% 52% / 0.2);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0);
+  }
+
+  /* Premium image styling */
+  .image-card {
+    @apply relative overflow-hidden rounded-xl border transition-all duration-500;
+    box-shadow: 0 8px 32px rgba(52, 211, 153, 0.1);
+  }
+
+  .image-card:hover {
+    border-color: hsl(180 98% 52% / 0.6);
+    box-shadow: 0 20px 60px rgba(52, 211, 153, 0.25);
+  }
+
+  .image-card img {
+    @apply transition-transform duration-700;
+  }
+
+  .image-card:hover img {
+    @apply scale-110;
+  }
+
+  /* Gradient text animation */
+
   .section-padding { @apply py-20 md:py-32 px-6 md:px-10; }
   .container-x { @apply max-w-7xl mx-auto; }
+  
   .glow-border {
     box-shadow: 0 0 0 1px hsl(var(--secondary) / 0.2), 0 0 40px -10px hsl(var(--secondary) / 0.3);
   }
 
+  .glow-border-lg {
+    box-shadow: 0 0 0 1px hsl(var(--secondary) / 0.3), 0 0 60px -15px hsl(var(--secondary) / 0.4), inset 0 0 30px -10px hsl(var(--secondary) / 0.1);
+  }
+
+  .card-hover {
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 60px rgba(52, 211, 153, 0.15), 0 0 50px -10px rgba(52, 211, 153, 0.25);
+  }
+
+  .logo-placeholder {
+    @apply w-full h-full flex items-center justify-center font-bold text-sm;
+  }
+
   .animate-fade-up { animation: fadeUp 0.8s ease-out forwards; opacity: 0; }
   .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+  .animate-blur-in { animation: blurIn 0.8s ease-out forwards; opacity: 0; filter: blur(10px); }
+  .animate-scale-in { animation: scaleIn 0.6s cubic-bezier(0.23, 1, 0.320, 1) forwards; opacity: 0; }
   .logo-scroll { animation: scroll 30s linear infinite; }
+  .float-animation { animation: float 3s ease-in-out infinite; }
 }
 
 @keyframes fadeUp {
@@ -90,7 +246,31 @@
 @keyframes fadeIn {
   from { opacity: 0; } to { opacity: 1; }
 }
+@keyframes blurIn {
+  from { opacity: 0; filter: blur(10px); } 
+  to { opacity: 1; filter: blur(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); } 
+  to { opacity: 1; transform: scale(1); }
+}
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 1px hsl(var(--secondary) / 0.2), 0 0 40px -10px hsl(var(--secondary) / 0.3); }
+  50% { box-shadow: 0 0 0 1px hsl(var(--secondary) / 0.4), 0 0 60px -5px hsl(var(--secondary) / 0.5); }
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
 }

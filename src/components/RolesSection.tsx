@@ -51,16 +51,21 @@ const RolesSection = () => {
   const s = services[active];
 
   return (
-    <section id="services" className="section-padding bg-card border-t border-border">
-      <div className="container-x">
+    <section id="services" className="section-padding bg-background border-t border-border/30 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-10"></div>
+      
+      <div className="container-x relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-7">
             <Reveal>
-              <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6">Services</div>
+              <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6 font-semibold">Services</div>
             </Reveal>
             <Reveal delay={0.1}>
-              <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-500 text-foreground leading-[1.1]">
-                The same task. Two<br />very different outcomes.
+              <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-600 text-foreground leading-[1.1]">
+                The same task. Two<br />
+                <span className="text-gradient">very different outcomes.</span>
               </h2>
             </Reveal>
           </div>
@@ -75,77 +80,103 @@ const RolesSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-4 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible -mx-6 lg:mx-0 px-6 lg:px-0">
+          <div className="lg:col-span-4 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible -mx-6 lg:mx-0 px-6 lg:px-0 pb-2 lg:pb-0">
             {services.map((svc, i) => (
-              <button
+              <motion.button
                 key={svc.name}
                 onClick={() => setActive(i)}
-                className={`text-left whitespace-nowrap lg:whitespace-normal px-5 py-4 rounded-lg border transition-all flex items-center justify-between gap-4 ${
+                whileHover={{ scale: 1.02, x: 4 }}
+                whileTap={{ scale: 0.98 }}
+                className={`text-left whitespace-nowrap lg:whitespace-normal px-5 py-4 rounded-lg border transition-all flex items-center justify-between gap-4 duration-300 ${
                   active === i
-                    ? "bg-background border-secondary/40 text-foreground"
-                    : "border-border text-foreground/60 hover:text-foreground hover:border-foreground/20"
+                    ? "bg-gradient-to-r from-secondary/20 to-blue-500/10 border-secondary/50 text-foreground shadow-lg shadow-secondary/20"
+                    : "border-border/50 text-foreground/60 hover:text-foreground hover:border-secondary/30 hover:bg-card/50"
                 }`}
               >
-                <span className="font-heading font-500">{svc.name}</span>
-                <ArrowUpRight size={14} className={active === i ? "text-secondary" : "opacity-40"} />
-              </button>
+                <span className="font-heading font-600">{svc.name}</span>
+                <motion.div 
+                  animate={{ x: active === i ? 4 : 0, rotate: active === i ? 45 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ArrowUpRight size={14} className={active === i ? "text-secondary" : "opacity-40"} />
+                </motion.div>
+              </motion.button>
             ))}
           </div>
 
-          <div className="lg:col-span-8 grid md:grid-cols-2 gap-px bg-border rounded-xl overflow-hidden">
+          <div className="lg:col-span-8 grid md:grid-cols-2 gap-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={`aug-${active}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                className="bg-background p-8 md:p-10 relative"
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="glass-effect card-hover bg-card/50 border border-secondary/20 hover:border-secondary/40 p-8 md:p-10 rounded-lg relative overflow-hidden group"
               >
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent" />
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center">
-                    <Sparkles size={14} className="text-secondary" />
-                  </div>
-                  <span className="text-xs uppercase tracking-[0.2em] text-secondary font-semibold">
-                    Crewvoy AI Operator
-                  </span>
-                </div>
-                <h3 className="font-heading text-xl font-600 text-foreground mb-4">{s.name}</h3>
-                <p className="text-foreground/70 text-sm leading-relaxed">{s.augmented}</p>
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <motion.div 
+                  className="w-8 h-8 rounded-full bg-gradient-to-br from-secondary/30 to-blue-500/20 flex items-center justify-center mb-6 group-hover:from-secondary/50 group-hover:to-blue-500/40 transition-all duration-300"
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ repeat: Infinity, duration: 3 }}
+                >
+                  <Sparkles size={14} className="text-secondary" />
+                </motion.div>
+                
+                <span className="text-xs uppercase tracking-[0.2em] text-secondary font-bold mb-4 inline-block group-hover:text-cyan-300 transition-colors duration-300">
+                  Crewvoy AI Operator
+                </span>
+                <h3 className="font-heading text-xl font-600 text-foreground mb-4 group-hover:text-gradient transition-all duration-300">{s.name}</h3>
+                <p className="text-foreground/70 text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300 relative z-10">{s.augmented}</p>
               </motion.div>
             </AnimatePresence>
 
             <AnimatePresence mode="wait">
               <motion.div
                 key={`norm-${active}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="bg-background p-8 md:p-10"
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="glass-effect bg-card/30 border border-border/50 hover:border-foreground/20 p-8 md:p-10 rounded-lg relative overflow-hidden group transition-all duration-300"
               >
-                <div className="flex items-center gap-2 mb-6">
-                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                    <User size={14} className="text-foreground/50" />
-                  </div>
-                  <span className="text-xs uppercase tracking-[0.2em] text-foreground/40 font-semibold">
-                    Normal VA
-                  </span>
-                </div>
-                <h3 className="font-heading text-xl font-600 text-foreground/70 mb-4">{s.name}</h3>
-                <p className="text-foreground/40 text-sm leading-relaxed">{s.normal}</p>
+                <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <motion.div 
+                  className="w-8 h-8 rounded-full bg-muted/40 flex items-center justify-center mb-6 group-hover:bg-muted/60 transition-all duration-300"
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ repeat: Infinity, duration: 3, delay: 0.5 }}
+                >
+                  <User size={14} className="text-foreground/50 group-hover:text-foreground/70 transition-colors" />
+                </motion.div>
+                
+                <span className="text-xs uppercase tracking-[0.2em] text-foreground/40 font-bold mb-4 inline-block group-hover:text-foreground/60 transition-colors duration-300">
+                  Normal VA
+                </span>
+                <h3 className="font-heading text-xl font-600 text-foreground/70 mb-4 group-hover:text-foreground/90 transition-colors duration-300">{s.name}</h3>
+                <p className="text-foreground/40 text-sm leading-relaxed group-hover:text-foreground/50 transition-colors duration-300">{s.normal}</p>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
 
-        <Reveal className="mt-16 text-center">
-          <a href="#booking"
-            className="inline-flex items-center gap-2 bg-foreground text-background px-7 py-4 rounded-full text-sm font-semibold hover:bg-secondary hover:text-secondary-foreground transition-all">
-            Engineer my workforce <ArrowUpRight size={16} />
-          </a>
-        </Reveal>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="mt-16 text-center"
+        >
+          <motion.a href="#booking"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            className="btn-coral"
+          >
+            Engineer my workforce <motion.div animate={{ x: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 2 }}><ArrowUpRight size={16} /></motion.div>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );

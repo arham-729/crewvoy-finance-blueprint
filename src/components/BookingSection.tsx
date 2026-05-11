@@ -380,7 +380,7 @@ const BookingSection = () => {
                   <button
                     onClick={handleSubmit}
                     disabled={isSending}
-                    className="w-full mt-8 bg-secondary text-secondary-foreground py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity text-base"
+                    className="w-full mt-8 btn-coral justify-center disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSending ? "Sending..." : "Book Your Free Discovery Call"}
                   </button>
