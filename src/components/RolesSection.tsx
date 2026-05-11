@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Sparkles, User, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Reveal } from "./motion";
 
 const services = [
   {
@@ -53,21 +55,26 @@ const RolesSection = () => {
       <div className="container-x">
         <div className="grid lg:grid-cols-12 gap-12 mb-16">
           <div className="lg:col-span-7">
-            <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6">Services</div>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-500 text-foreground leading-[1.1]">
-              The same task. Two<br />very different outcomes.
-            </h2>
+            <Reveal>
+              <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6">Services</div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-500 text-foreground leading-[1.1]">
+                The same task. Two<br />very different outcomes.
+              </h2>
+            </Reveal>
           </div>
           <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-            <p className="text-foreground/60 text-base leading-relaxed">
-              Pick a service to see what a Crewvoy AI-Augmented Operator delivers
-              versus what you'd get from a typical remote VA.
-            </p>
+            <Reveal delay={0.2}>
+              <p className="text-foreground/60 text-base leading-relaxed">
+                Pick a service to see what a Crewvoy AI-Augmented Operator delivers
+                versus what you'd get from a typical remote VA.
+              </p>
+            </Reveal>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8">
-          {/* Service tabs */}
           <div className="lg:col-span-4 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible -mx-6 lg:mx-0 px-6 lg:px-0">
             {services.map((svc, i) => (
               <button
@@ -85,42 +92,60 @@ const RolesSection = () => {
             ))}
           </div>
 
-          {/* Comparison */}
           <div className="lg:col-span-8 grid md:grid-cols-2 gap-px bg-border rounded-xl overflow-hidden">
-            <div className="bg-background p-8 md:p-10 relative">
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent" />
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center">
-                  <Sparkles size={14} className="text-secondary" />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`aug-${active}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="bg-background p-8 md:p-10 relative"
+              >
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent" />
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-8 h-8 rounded-full bg-secondary/15 flex items-center justify-center">
+                    <Sparkles size={14} className="text-secondary" />
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.2em] text-secondary font-semibold">
+                    Crewvoy AI Operator
+                  </span>
                 </div>
-                <span className="text-xs uppercase tracking-[0.2em] text-secondary font-semibold">
-                  Crewvoy AI Operator
-                </span>
-              </div>
-              <h3 className="font-heading text-xl font-600 text-foreground mb-4">{s.name}</h3>
-              <p className="text-foreground/70 text-sm leading-relaxed">{s.augmented}</p>
-            </div>
-            <div className="bg-background p-8 md:p-10">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                  <User size={14} className="text-foreground/50" />
+                <h3 className="font-heading text-xl font-600 text-foreground mb-4">{s.name}</h3>
+                <p className="text-foreground/70 text-sm leading-relaxed">{s.augmented}</p>
+              </motion.div>
+            </AnimatePresence>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`norm-${active}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.45, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+                className="bg-background p-8 md:p-10"
+              >
+                <div className="flex items-center gap-2 mb-6">
+                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                    <User size={14} className="text-foreground/50" />
+                  </div>
+                  <span className="text-xs uppercase tracking-[0.2em] text-foreground/40 font-semibold">
+                    Normal VA
+                  </span>
                 </div>
-                <span className="text-xs uppercase tracking-[0.2em] text-foreground/40 font-semibold">
-                  Normal VA
-                </span>
-              </div>
-              <h3 className="font-heading text-xl font-600 text-foreground/70 mb-4">{s.name}</h3>
-              <p className="text-foreground/40 text-sm leading-relaxed">{s.normal}</p>
-            </div>
+                <h3 className="font-heading text-xl font-600 text-foreground/70 mb-4">{s.name}</h3>
+                <p className="text-foreground/40 text-sm leading-relaxed">{s.normal}</p>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
-        <div className="mt-16 text-center">
+        <Reveal className="mt-16 text-center">
           <a href="#booking"
             className="inline-flex items-center gap-2 bg-foreground text-background px-7 py-4 rounded-full text-sm font-semibold hover:bg-secondary hover:text-secondary-foreground transition-all">
             Engineer my workforce <ArrowUpRight size={16} />
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
