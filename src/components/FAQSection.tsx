@@ -1,53 +1,58 @@
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 
 const faqs = [
   {
-    q: "What services do you offer?",
-    a: "We provide dedicated remote financial professionals including payroll support, accounts payable/receivable, tax preparation, bookkeeping, audit services, and e-commerce finance specialists.",
+    q: "What exactly is a Crewvoy AI-Augmented Operator?",
+    a: "A senior remote operator paired with custom chatbots, proprietary web systems and automation workflows we build for your business. They run the playbook, AI handles the velocity, you keep the judgement.",
   },
   {
-    q: "How fast can we start?",
-    a: "We can find and place your financial professional within 1 week. Our sourcing, interviewing, and vetting processes are handled entirely by us.",
+    q: "How is this different from hiring a normal VA?",
+    a: "A normal VA does tasks one by one. Our operators ship outcomes powered by automation that runs 24/7. You get agency-level output without agency-level overhead.",
   },
   {
-    q: "Are professionals dedicated to my business?",
-    a: "Yes. All our professionals work full-time (40 hours/week) exclusively for you, in your time zone, using your tools — just like a regular employee.",
+    q: "How fast can you deploy?",
+    a: "Initial audit and architecture in days. Most operators are deployed and live inside your stack in under a week.",
+  },
+  {
+    q: "Will I own the systems you build?",
+    a: "Yes. All chatbots, scenarios, dashboards and web systems are yours. We architect them inside accounts you control.",
   },
   {
     q: "How does pricing work?",
-    a: "Our pricing is simple and transparent with no hidden charges. CrewVoy professionals cost up to 75% less compared to local equivalents while maintaining the highest quality standards.",
+    a: "Flat monthly engagement bundling the operator, the systems, and ongoing optimisation. Typically 60–80% lower than the equivalent in-house build.",
   },
 ];
 
 const FAQSection = () => {
   return (
-    <section className="section-padding bg-card">
-      <div className="max-w-3xl mx-auto">
-        <h2 className="font-heading text-3xl md:text-4xl font-800 text-foreground text-center mb-12">
-          Frequently Asked Questions
-        </h2>
-
-        <Accordion type="single" collapsible className="space-y-3">
-          {faqs.map((faq, i) => (
-            <AccordionItem
-              key={i}
-              value={`item-${i}`}
-              className="bg-background rounded-xl border border-border px-6"
-            >
-              <AccordionTrigger className="text-foreground font-heading font-600 text-left hover:no-underline">
-                {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
-                {faq.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+    <section className="section-padding bg-background border-t border-border">
+      <div className="container-x grid lg:grid-cols-12 gap-12">
+        <div className="lg:col-span-4">
+          <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6">FAQ</div>
+          <h2 className="font-heading text-4xl md:text-5xl font-500 text-foreground leading-[1.1]">
+            Questions,<br /><span className="italic font-400">answered.</span>
+          </h2>
+        </div>
+        <div className="lg:col-span-8">
+          <Accordion type="single" collapsible className="space-y-2">
+            {faqs.map((faq, i) => (
+              <AccordionItem
+                key={i}
+                value={`item-${i}`}
+                className="bg-card rounded-lg border border-border px-6 data-[state=open]:border-secondary/40 transition-colors"
+              >
+                <AccordionTrigger className="text-foreground font-heading font-500 text-left hover:no-underline text-base py-5">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-foreground/60 leading-relaxed pb-5">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );
