@@ -44,27 +44,13 @@ const services = [
   },
 ];
 
-const RolesSection = () => {
-  const [active, setActive] = useState(0);
-  const s = services[active];
+import { useState } from "react";
+import { Sparkles, User, ArrowUpRight } from "lucide-react";
+import { Reveal } from "./motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-  return (
-    <section id="services" className="section-padding bg-card border-t border-border">
-      <div className="container-x">
-        <div className="grid lg:grid-cols-12 gap-12 mb-16">
-          <div className="lg:col-span-7">
-            <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6">Services</div>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-500 text-foreground leading-[1.1]">
-              The same task. Two<br />very different outcomes.
-            </h2>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-            <p className="text-foreground/60 text-base leading-relaxed">
-              Pick a service to see what a Crewvoy AI-Augmented Operator delivers
-              versus what you'd get from a typical remote VA.
-            </p>
-          </div>
-        </div>
+// keep services array above unchanged
+
 
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Service tabs */}
