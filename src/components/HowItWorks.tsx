@@ -1,64 +1,67 @@
-import { Phone, Search, UserCheck } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import sectionBg from "@/assets/section-bg.jpg";
 
 const steps = [
   {
-    num: "1",
-    icon: Phone,
-    title: "Book a Call",
-    desc: "Schedule a consultation and tell us about your company and financial needs.",
+    num: "01",
+    title: "Audit & architect",
+    desc: "We map every workflow, identify automation surface area and architect an AI-augmented operating model tailored to your business.",
   },
   {
-    num: "2",
-    icon: Search,
-    title: "We Understand Your Financial Needs",
-    desc: "Our recruiters rigorously vet and screen candidates to find the perfect match for your business.",
+    num: "02",
+    title: "Deploy systems",
+    desc: "Custom chatbots, proprietary web systems and Make.com / n8n pipelines are built and wired into your existing stack — under one week.",
   },
   {
-    num: "3",
-    icon: UserCheck,
-    title: "We Match You With Expert Professionals",
-    desc: "Meet your new team member and receive ongoing support to ensure everything runs smoothly.",
+    num: "03",
+    title: "Match the operator",
+    desc: "We assign a senior operator trained on the systems we just built. They run the playbook, you keep judgement and approval.",
+  },
+  {
+    num: "04",
+    title: "Scale & optimise",
+    desc: "Weekly KPI reviews, AI-generated dashboards and continuous system upgrades. Output compounds, overhead doesn't.",
   },
 ];
 
 const HowItWorks = () => {
   return (
-    <section id="how-it-works" className="section-padding hero-gradient">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-heading text-3xl md:text-4xl font-800 text-hero-foreground mb-4">
-            How It Works?
-          </h2>
-          <p className="text-hero-foreground/70 text-lg max-w-xl mx-auto">
-            No more stacks of resumes or endless interviews. CrewVoy owns the recruitment cycle so you don't have to.
-          </p>
+    <section id="how-it-works" className="section-padding relative overflow-hidden border-t border-border">
+      <img
+        src={sectionBg}
+        alt=""
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
+        width={1920}
+        height={1088}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
+
+      <div className="relative container-x">
+        <div className="grid lg:grid-cols-12 gap-12 mb-20">
+          <div className="lg:col-span-7">
+            <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6">Process</div>
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-500 text-foreground leading-[1.1]">
+              From friction to<br />
+              <span className="italic font-400">infinite scale.</span>
+            </h2>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {steps.map((step, i) => (
-            <div key={i} className="relative text-center">
-              <div className="w-16 h-16 rounded-2xl bg-secondary/20 flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl font-heading font-800 text-secondary">{step.num}</span>
-              </div>
-              <step.icon className="text-hero-foreground/50 mx-auto mb-4" size={32} />
-              <h3 className="font-heading text-xl font-700 text-hero-foreground mb-3">{step.title}</h3>
-              <p className="text-hero-foreground/60 text-sm leading-relaxed max-w-xs mx-auto">{step.desc}</p>
-
-              {i < 2 && (
-                <div className="hidden md:block absolute top-8 -right-4 w-8 text-secondary/40">
-                  →
-                </div>
-              )}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
+          {steps.map((step) => (
+            <div key={step.num} className="bg-background p-8 md:p-10 group hover:bg-card transition-colors">
+              <div className="text-secondary font-mono text-sm mb-12">{step.num}</div>
+              <h3 className="font-heading text-xl font-600 text-foreground mb-3">{step.title}</h3>
+              <p className="text-foreground/60 text-sm leading-relaxed">{step.desc}</p>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <a
-            href="#booking"
-            className="inline-flex items-center gap-2 bg-secondary text-secondary-foreground px-8 py-3.5 rounded-xl font-semibold hover:opacity-90 transition-opacity"
-          >
-            Start Hiring Now
+        <div className="mt-16 text-center">
+          <a href="#booking"
+            className="inline-flex items-center gap-2 text-foreground border border-border hover:border-secondary/60 hover:text-secondary px-7 py-4 rounded-full text-sm font-semibold transition-all">
+            Start your audit <ArrowUpRight size={16} />
           </a>
         </div>
       </div>

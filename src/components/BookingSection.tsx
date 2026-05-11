@@ -185,50 +185,53 @@ const BookingSection = () => {
   };
 
   return (
-    <section id="booking" className="section-padding bg-muted">
+    <section id="booking" className="section-padding bg-background border-t border-border">
       <div className="max-w-5xl mx-auto">
-        <h2 className="font-heading text-3xl md:text-4xl font-800 text-foreground text-center mb-12">
-          Book a Consultation
-        </h2>
+        <div className="text-center mb-14">
+          <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6">Book a call</div>
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-500 text-foreground leading-[1.1]">
+            Let's architect<br /><span className="italic font-400">your edge.</span>
+          </h2>
+        </div>
 
         <div className="bg-card rounded-3xl shadow-xl overflow-hidden border border-border">
           <div className="grid md:grid-cols-5">
             {/* Left Panel */}
-            <div className="md:col-span-2 hero-gradient p-8 flex flex-col justify-center relative">
+            <div className="md:col-span-2 bg-muted p-8 flex flex-col justify-center relative border-r border-border">
               {step === "details" && (
                 <button
                   onClick={handleBack}
-                  className="absolute top-6 left-6 w-10 h-10 rounded-full border border-hero-foreground/20 flex items-center justify-center text-hero-foreground/60 hover:text-hero-foreground hover:border-hero-foreground/40 transition-colors"
+                  className="absolute top-6 left-6 w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-foreground/40 transition-colors"
                 >
                   <ArrowLeft size={18} />
                 </button>
               )}
 
-              <h3 className="font-heading text-2xl font-800 text-hero-foreground mb-2">
-                Crew<span className="text-gradient">Voy</span>
+              <h3 className="font-heading text-2xl font-700 text-foreground mb-2">
+                crewvoy<span className="text-secondary">.</span>
               </h3>
-              <p className="text-hero-foreground/70 text-sm mb-6">Free Consultation Call</p>
+              <p className="text-foreground/60 text-sm mb-6">Free Strategy Call</p>
 
-              <div className="flex items-center gap-2 text-hero-foreground/60 text-sm mb-3">
+              <div className="flex items-center gap-2 text-foreground/60 text-sm mb-3">
                 <Clock size={16} />
                 <span>30 minutes</span>
               </div>
 
               {step === "details" && selectedDate && selectedTime && (
-                <div className="flex items-center gap-2 text-hero-foreground/60 text-sm mb-3">
+                <div className="flex items-center gap-2 text-foreground/60 text-sm mb-3">
                   <Calendar size={16} />
                   <span>{formatSelectedDateTime()}</span>
                 </div>
               )}
 
-              <div className="flex items-center gap-2 text-hero-foreground/60 text-sm mb-6">
+              <div className="flex items-center gap-2 text-foreground/60 text-sm mb-6">
                 <Globe size={16} />
                 <span>Asia/Karachi (GMT+5)</span>
               </div>
 
-              <p className="text-hero-foreground/50 text-xs leading-relaxed">
-                You're a few steps away from finding the ideal financial professional for your business. 
-                Book a call and let us understand your needs.
+              <p className="text-foreground/50 text-xs leading-relaxed">
+                30 minutes to map your workflows, identify automation surface area, and show you what
+                a Crewvoy AI-Augmented Operator could ship inside your business.
               </p>
             </div>
 
