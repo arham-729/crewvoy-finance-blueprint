@@ -201,7 +201,7 @@ const BookingSection = () => {
               {step === "details" && (
                 <button
                   onClick={handleBack}
-                  className="absolute top-6 left-6 w-10 h-10 rounded-full border border-hero-foreground/20 flex items-center justify-center text-hero-foreground/60 hover:text-hero-foreground hover:border-hero-foreground/40 transition-colors"
+                  className="absolute top-6 left-6 w-10 h-10 rounded-full border border-foreground/20 flex items-center justify-center text-foreground/60 hover:text-foreground hover:border-foreground/40 transition-colors"
                 >
                   <ArrowLeft size={18} />
                 </button>
@@ -212,19 +212,19 @@ const BookingSection = () => {
               </h3>
               <p className="text-foreground/60 text-sm mb-6">Free Strategy Call</p>
 
-              <div className="flex items-center gap-2 text-hero-foreground/60 text-sm mb-3">
+              <div className="flex items-center gap-2 text-foreground/60 text-sm mb-3">
                 <Clock size={16} />
                 <span>30 minutes</span>
               </div>
 
               {step === "details" && selectedDate && selectedTime && (
-                <div className="flex items-center gap-2 text-hero-foreground/60 text-sm mb-3">
+                <div className="flex items-center gap-2 text-foreground/60 text-sm mb-3">
                   <Calendar size={16} />
                   <span>{formatSelectedDateTime()}</span>
                 </div>
               )}
 
-              <div className="flex items-center gap-2 text-hero-foreground/60 text-sm mb-6">
+              <div className="flex items-center gap-2 text-foreground/60 text-sm mb-6">
                 <Globe size={16} />
                 <span>Asia/Karachi (GMT+5)</span>
               </div>
