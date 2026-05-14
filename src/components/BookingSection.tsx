@@ -100,8 +100,6 @@ const BookingSection = () => {
 
             {/* ── Left panel — dark ── */}
             <div className="md:col-span-2 relative flex flex-col p-9" style={{ background: "#0D1117" }}>
-              {/* Pink glow */}
-              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full pointer-events-none blur-3xl" style={{ background: "rgba(212,0,122,0.12)" }} />
 
               {step === "details" && (
                 <button
@@ -116,7 +114,7 @@ const BookingSection = () => {
               <div className="relative z-10 flex flex-col h-full">
                 <div className="mb-8">
                   <p className="font-heading text-xl font-bold text-white mb-1">
-                    crewvoy<span style={{ color: "#D4007A" }}>.</span>
+                    crewvoy<span style={{ color: "#FC94AF" }}>.</span>
                   </p>
                   <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.35)" }}>Free Strategy Call</p>
                 </div>
@@ -125,8 +123,8 @@ const BookingSection = () => {
                 <div className="space-y-5 mb-8 flex-1">
                   {perks.map(({ icon: Icon, label, sub }) => (
                     <div key={label} className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,0,122,0.15)" }}>
-                        <Icon size={15} style={{ color: "#F472B6" }} />
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(252,148,175,0.15)" }}>
+                        <Icon size={15} style={{ color: "#FC94AF" }} />
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-white">{label}</p>
@@ -144,11 +142,11 @@ const BookingSection = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       className="rounded-xl p-4 mb-6"
-                      style={{ background: "rgba(212,0,122,0.12)", border: "1px solid rgba(212,0,122,0.3)" }}
+                      style={{ background: "rgba(252,148,175,0.12)", border: "1px solid rgba(252,148,175,0.3)" }}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <Calendar size={13} style={{ color: "#F472B6" }} />
-                        <span className="text-xs font-semibold" style={{ color: "#F472B6" }}>Your slot</span>
+                        <Calendar size={13} style={{ color: "#FC94AF" }} />
+                        <span className="text-xs font-semibold" style={{ color: "#FC94AF" }}>Your slot</span>
                       </div>
                       <p className="text-sm font-medium text-white leading-snug">{formatDateTime()}</p>
                       <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>Asia/Karachi (GMT+5)</p>

@@ -45,20 +45,35 @@ const Footer = () => {
               <a href="https://www.linkedin.com/company/crewvoy/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/45 text-sm hover:text-white transition-colors duration-200">
                 <Linkedin size={13} /> LinkedIn
               </a>
-              <a href="mailto:arhamharoonansari70@gmail.com" className="flex items-center gap-2 text-white/45 text-sm hover:text-white transition-colors duration-200 break-all">
-                <Mail size={13} className="flex-shrink-0" /> arhamharoonansari70@gmail.com
-              </a>
-              <a href="mailto:Hamzaareeb048@gmail.com" className="flex items-center gap-2 text-white/45 text-sm hover:text-white transition-colors duration-200 break-all">
-                <Mail size={13} className="flex-shrink-0" /> Hamzaareeb048@gmail.com
+              <a href="mailto:crewvoy@proton.me" className="flex items-center gap-2 text-white/45 text-sm hover:text-white transition-colors duration-200">
+                <Mail size={13} className="flex-shrink-0" /> crewvoy@proton.me
               </a>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-col items-center gap-5 text-center">
           <p className="font-heading text-xl font-bold text-white">
-            crewvoy<span style={{ color: "#D4007A" }}>.</span>
+            crewvoy<span style={{ color: "#FC94AF" }}>.</span>
           </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://www.linkedin.com/company/crewvoy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-white/40 hover:text-white transition-colors duration-200"
+              style={{ border: "1px solid rgba(255,255,255,0.12)" }}
+            >
+              <Linkedin size={15} />
+            </a>
+            <a
+              href="mailto:crewvoy@proton.me"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-white/40 hover:text-white transition-colors duration-200"
+              style={{ border: "1px solid rgba(255,255,255,0.12)" }}
+            >
+              <Mail size={15} />
+            </a>
+          </div>
           <p className="text-white/25 text-xs">
             © {new Date().getFullYear()} Crewvoy. Engineering tomorrow's workforce.
           </p>

@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
-import imgTeam from "@/assets/pics/image_one.jpeg";
+import imgTeam from "@/assets/pics/image_six.jpeg";
 import imgDashboard from "@/assets/pics/image_two.jpeg";
 import { Reveal, CountUp, BlurReveal } from "./motion";
 

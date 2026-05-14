@@ -142,9 +142,8 @@ const RolesSection = () => {
                 className="relative bg-[#0D1117] rounded-2xl overflow-hidden flex flex-col"
                 style={{ minHeight: 340 }}
               >
-                {/* Subtle pink glow top */}
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4007A] to-transparent" />
-                <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-32 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(212,0,122,0.18)" }} />
+                {/* Subtle pink top line */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FC94AF] to-transparent" />
 
                 <div className="relative z-10 p-8 md:p-10 flex flex-col h-full">
                   {/* Badge */}
