@@ -39,17 +39,6 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/30 mb-6">Contact</p>
-            <div className="space-y-3">
-              <a href="https://www.linkedin.com/company/crewvoy/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-white/45 text-sm hover:text-white transition-colors duration-200">
-                <Linkedin size={13} /> LinkedIn
-              </a>
-              <a href="mailto:crewvoy@proton.me" className="flex items-center gap-2 text-white/45 text-sm hover:text-white transition-colors duration-200">
-                <Mail size={13} className="flex-shrink-0" /> crewvoy@proton.me
-              </a>
-            </div>
-          </div>
         </div>
 
         <div className="flex flex-col items-center gap-5 text-center">
