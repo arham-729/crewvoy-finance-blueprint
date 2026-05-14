@@ -31,10 +31,10 @@ const Testimonials = () => {
           {testimonials.map((t, i) => (
             <StaggerItem key={i}>
               <div className="card-surface-light card-hover p-8 md:p-10 h-full rounded-xl flex flex-col">
-                <div className="text-[#0064DA] text-4xl font-heading leading-none mb-5 select-none opacity-30">"</div>
+                <div className="text-[#D4007A] text-4xl font-heading leading-none mb-5 select-none opacity-30">"</div>
                 <p className="text-[#444B5A] text-sm leading-relaxed flex-1 mb-8">{t.quote}</p>
                 <div className="flex items-center gap-3 pt-6 border-t border-[#E8EAF0]">
-                  <div className="w-9 h-9 rounded-full bg-[#EEF3FF] flex items-center justify-center text-[#0064DA] text-xs font-bold flex-shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-[#FDF0F8] flex items-center justify-center text-[#D4007A] text-xs font-bold flex-shrink-0">
                     {t.name.split(" ").map(n => n[0]).join("")}
                   </div>
                   <div>

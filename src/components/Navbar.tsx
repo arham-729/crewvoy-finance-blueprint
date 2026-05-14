@@ -32,7 +32,7 @@ const Navbar = () => {
     >
       <div className="container-x px-6 md:px-10 flex items-center justify-between py-4">
         <a href="#" className="font-heading text-lg font-bold text-white">
-          crewvoy<span style={{ color: "#0064DA" }}>.</span>
+          crewvoy<span style={{ color: "#D4007A" }}>.</span>
         </a>
 
         <div className="hidden md:flex items-center gap-9">
@@ -44,7 +44,7 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 + 0.1 }}
               className={`text-sm font-medium transition-colors duration-200 ${
-                scrolled ? "text-[#444] hover:text-[#0064DA]" : "text-white/80 hover:text-white"
+                scrolled ? "text-[#444] hover:text-[#D4007A]" : "text-white/80 hover:text-white"
               }`}
             >
               {l.label}
@@ -56,7 +56,7 @@ const Navbar = () => {
           href="#booking"
           className={`hidden md:inline-flex items-center gap-1.5 text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 ${
             scrolled
-              ? "bg-[#0064DA] text-white hover:bg-[#0055BA]"
+              ? "bg-[#D4007A] text-white hover:bg-[#A8005F]"
               : "bg-white/10 text-white border border-white/25 hover:bg-white/20"
           }`}
         >
@@ -82,7 +82,7 @@ const Navbar = () => {
             <a
               key={l.label}
               href={l.href}
-              className="block text-[#444] text-sm font-medium hover:text-[#0064DA] transition-colors"
+              className="block text-[#444] text-sm font-medium hover:text-[#D4007A] transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               {l.label}
@@ -90,7 +90,7 @@ const Navbar = () => {
           ))}
           <a
             href="#booking"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold bg-[#0064DA] text-white px-5 py-2.5 rounded-lg"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold bg-[#D4007A] text-white px-5 py-2.5 rounded-lg"
             onClick={() => setMobileOpen(false)}
           >
             Get in touch <ArrowUpRight size={13} />

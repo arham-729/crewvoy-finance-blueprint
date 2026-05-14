@@ -63,7 +63,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xs font-semibold uppercase tracking-[0.2em] mb-7"
-            style={{ color: "#0064DA" }}
+            style={{ color: "#D4007A" }}
           >
             AI-Augmented Workforce
           </motion.p>

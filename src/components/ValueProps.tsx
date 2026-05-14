@@ -83,8 +83,8 @@ const ValueProps = () => {
             <StaggerItem key={f.num}>
               <div className="card-surface card-hover card-accent-top p-10 md:p-12 h-full">
                 <div className="flex items-start justify-between mb-10">
-                  <div className="w-11 h-11 rounded-xl bg-[#EEF3FF] flex items-center justify-center">
-                    <f.icon style={{ color: "#0064DA" }} size={19} />
+                  <div className="w-11 h-11 rounded-xl bg-[#FDF0F8] flex items-center justify-center">
+                    <f.icon style={{ color: "#D4007A" }} size={19} />
                   </div>
                   <span className="text-xs font-mono text-[#C0C5D5] font-semibold">{f.num}</span>
                 </div>

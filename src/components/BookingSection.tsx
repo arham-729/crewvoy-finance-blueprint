@@ -100,8 +100,8 @@ const BookingSection = () => {
 
             {/* ── Left panel — dark ── */}
             <div className="md:col-span-2 relative flex flex-col p-9" style={{ background: "#0D1117" }}>
-              {/* Blue glow */}
-              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full pointer-events-none blur-3xl" style={{ background: "rgba(0,100,218,0.12)" }} />
+              {/* Pink glow */}
+              <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full pointer-events-none blur-3xl" style={{ background: "rgba(212,0,122,0.12)" }} />
 
               {step === "details" && (
                 <button
@@ -116,7 +116,7 @@ const BookingSection = () => {
               <div className="relative z-10 flex flex-col h-full">
                 <div className="mb-8">
                   <p className="font-heading text-xl font-bold text-white mb-1">
-                    crewvoy<span style={{ color: "#0064DA" }}>.</span>
+                    crewvoy<span style={{ color: "#D4007A" }}>.</span>
                   </p>
                   <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.35)" }}>Free Strategy Call</p>
                 </div>
@@ -125,8 +125,8 @@ const BookingSection = () => {
                 <div className="space-y-5 mb-8 flex-1">
                   {perks.map(({ icon: Icon, label, sub }) => (
                     <div key={label} className="flex items-start gap-3">
-                      <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(0,100,218,0.2)" }}>
-                        <Icon size={15} style={{ color: "#4D9DFF" }} />
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,0,122,0.15)" }}>
+                        <Icon size={15} style={{ color: "#F472B6" }} />
                       </div>
                       <div>
                         <p className="text-sm font-semibold text-white">{label}</p>
@@ -144,11 +144,11 @@ const BookingSection = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 8 }}
                       className="rounded-xl p-4 mb-6"
-                      style={{ background: "rgba(0,100,218,0.15)", border: "1px solid rgba(0,100,218,0.3)" }}
+                      style={{ background: "rgba(212,0,122,0.12)", border: "1px solid rgba(212,0,122,0.3)" }}
                     >
                       <div className="flex items-center gap-2 mb-1">
-                        <Calendar size={13} style={{ color: "#4D9DFF" }} />
-                        <span className="text-xs font-semibold" style={{ color: "#4D9DFF" }}>Your slot</span>
+                        <Calendar size={13} style={{ color: "#F472B6" }} />
+                        <span className="text-xs font-semibold" style={{ color: "#F472B6" }}>Your slot</span>
                       </div>
                       <p className="text-sm font-medium text-white leading-snug">{formatDateTime()}</p>
                       <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>Asia/Karachi (GMT+5)</p>
@@ -177,11 +177,11 @@ const BookingSection = () => {
 
                     {/* Month nav */}
                     <div className="flex items-center justify-between mb-5">
-                      <button onClick={prevMonth} className="w-8 h-8 rounded-lg flex items-center justify-center text-[#9AA0B4] hover:text-[#0064DA] hover:bg-[#EEF3FF] transition-all">
+                      <button onClick={prevMonth} className="w-8 h-8 rounded-lg flex items-center justify-center text-[#9AA0B4] hover:text-[#D4007A] hover:bg-[#FDF0F8] transition-all">
                         <ChevronLeft size={17} />
                       </button>
                       <span className="font-bold text-sm text-[#0D1117]">{monthNames[currentMonth]} {currentYear}</span>
-                      <button onClick={nextMonth} className="w-8 h-8 rounded-lg flex items-center justify-center text-[#9AA0B4] hover:text-[#0064DA] hover:bg-[#EEF3FF] transition-all">
+                      <button onClick={nextMonth} className="w-8 h-8 rounded-lg flex items-center justify-center text-[#9AA0B4] hover:text-[#D4007A] hover:bg-[#FDF0F8] transition-all">
                         <ChevronRight size={17} />
                       </button>
                     </div>
@@ -210,15 +210,15 @@ const BookingSection = () => {
                             onClick={() => { setSelectedDate(day); setSelectedTime(null); }}
                             className={`relative h-9 w-full rounded-lg text-sm font-semibold transition-all duration-150 ${
                               selected
-                                ? "bg-[#0064DA] text-white shadow-md shadow-blue-200"
+                                ? "bg-[#D4007A] text-white shadow-md shadow-pink-200"
                                 : disabled
                                 ? "text-[#D0D5E0] cursor-not-allowed"
-                                : "text-[#374151] hover:bg-[#EEF3FF] hover:text-[#0064DA]"
+                                : "text-[#374151] hover:bg-[#FDF0F8] hover:text-[#D4007A]"
                             }`}
                           >
                             {day}
                             {today_d && !selected && (
-                              <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#0064DA]" />
+                              <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#D4007A]" />
                             )}
                           </button>
                         );
@@ -248,8 +248,8 @@ const BookingSection = () => {
                                 onClick={() => setSelectedTime(time)}
                                 className={`py-2.5 px-3 rounded-xl text-sm font-semibold border transition-all duration-150 ${
                                   selectedTime === time
-                                    ? "bg-[#0064DA] text-white border-[#0064DA] shadow-md shadow-blue-200"
-                                    : "bg-white border-[#E8EAF0] text-[#374151] hover:border-[#0064DA]/40 hover:bg-[#EEF3FF] hover:text-[#0064DA]"
+                                    ? "bg-[#D4007A] text-white border-[#D4007A] shadow-md shadow-pink-200"
+                                    : "bg-white border-[#E8EAF0] text-[#374151] hover:border-[#D4007A]/40 hover:bg-[#FDF0F8] hover:text-[#D4007A]"
                                 }`}
                               >
                                 {time}
@@ -283,7 +283,7 @@ const BookingSection = () => {
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <div className="flex items-center gap-3 mb-7">
-                      <CheckCircle2 size={20} className="text-[#0064DA]" />
+                      <CheckCircle2 size={20} className="text-[#D4007A]" />
                       <div>
                         <p className="text-xs text-[#9AA0B4] font-medium">Slot confirmed</p>
                         <p className="text-sm font-bold text-[#0D1117]">{formatDateTime()}</p>
@@ -300,7 +300,7 @@ const BookingSection = () => {
                           placeholder="Jane Smith"
                           value={fullName}
                           onChange={e => setFullName(e.target.value)}
-                          className="rounded-xl border-[#E8EAF0] focus:border-[#0064DA] focus:ring-[#0064DA]/20 h-11"
+                          className="rounded-xl border-[#E8EAF0] focus:border-[#D4007A] focus:ring-[#D4007A]/20 h-11"
                         />
                       </div>
                       <div className="space-y-1.5">
@@ -311,7 +311,7 @@ const BookingSection = () => {
                           placeholder="jane@company.com"
                           value={email}
                           onChange={e => setEmail(e.target.value)}
-                          className="rounded-xl border-[#E8EAF0] focus:border-[#0064DA] focus:ring-[#0064DA]/20 h-11"
+                          className="rounded-xl border-[#E8EAF0] focus:border-[#D4007A] focus:ring-[#D4007A]/20 h-11"
                         />
                       </div>
                       <div className="space-y-1.5 sm:col-span-2">
@@ -322,7 +322,7 @@ const BookingSection = () => {
                           placeholder="+1 (555) 000-0000"
                           value={phone}
                           onChange={e => setPhone(e.target.value)}
-                          className="rounded-xl border-[#E8EAF0] focus:border-[#0064DA] focus:ring-[#0064DA]/20 h-11"
+                          className="rounded-xl border-[#E8EAF0] focus:border-[#D4007A] focus:ring-[#D4007A]/20 h-11"
                         />
                       </div>
                     </div>

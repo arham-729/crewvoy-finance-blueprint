@@ -11,12 +11,12 @@ const TrustLogos = () => {
           Stack we build on
         </p>
         <div className="overflow-hidden relative">
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#F2F4F9] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#F2F4F9] to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#F8F4F7] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#F8F4F7] to-transparent z-10 pointer-events-none" />
           <div className="flex logo-scroll">
             {[...logos, ...logos, ...logos].map((name, i) => (
               <div key={i} className="flex-shrink-0 mx-10 flex items-center justify-center">
-                <span className="text-[#9AA0B4] font-semibold text-base whitespace-nowrap hover:text-[#0064DA] transition-colors duration-300 cursor-default">
+                <span className="text-[#9AA0B4] font-semibold text-base whitespace-nowrap hover:text-[#D4007A] transition-colors duration-300 cursor-default">
                   {name}
                 </span>
               </div>

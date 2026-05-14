@@ -57,7 +57,7 @@ const Footer = () => {
 
         <div className="flex flex-wrap items-center justify-between gap-4">
           <p className="font-heading text-xl font-bold text-white">
-            crewvoy<span style={{ color: "#0064DA" }}>.</span>
+            crewvoy<span style={{ color: "#D4007A" }}>.</span>
           </p>
           <p className="text-white/25 text-xs">
             © {new Date().getFullYear()} Crewvoy. Engineering tomorrow's workforce.

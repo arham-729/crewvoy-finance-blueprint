@@ -67,7 +67,7 @@ const RolesSection = () => {
   const s = services[active];
 
   return (
-    <section id="services" className="section-padding" style={{ background: "#F2F4F9" }}>
+    <section id="services" className="section-padding section-light">
       <div className="container-x">
         {/* Header */}
         <div className="grid lg:grid-cols-12 gap-10 mb-16">
@@ -104,20 +104,20 @@ const RolesSection = () => {
                   whileTap={{ scale: 0.97 }}
                   className={`relative text-left whitespace-nowrap lg:whitespace-normal px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center gap-3 ${
                     active === i
-                      ? "bg-[#0064DA] text-white shadow-lg"
-                      : "bg-white text-[#6B7280] hover:text-[#0D1117] border border-[#E8EAF0] hover:border-[#0064DA]/20 hover:bg-[#EEF3FF]"
+                      ? "bg-[#D4007A] text-white shadow-lg"
+                      : "bg-white text-[#6B7280] hover:text-[#0D1117] border border-[#E8EAF0] hover:border-[#D4007A]/20 hover:bg-[#FDF0F8]"
                   }`}
                 >
                   {active === i && (
                     <motion.div
                       layoutId="active-tab-indicator"
-                      className="absolute inset-0 rounded-xl bg-[#0064DA]"
+                      className="absolute inset-0 rounded-xl bg-[#D4007A]"
                       style={{ zIndex: -1 }}
                     />
                   )}
                   <span
                     className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0 ${
-                      active === i ? "bg-white/20 text-white" : "bg-[#F2F4F9] text-[#9AA0B4]"
+                      active === i ? "bg-white/20 text-white" : "bg-[#F8F4F7] text-[#9AA0B4]"
                     }`}
                   >
                     {i + 1}
@@ -142,17 +142,17 @@ const RolesSection = () => {
                 className="relative bg-[#0D1117] rounded-2xl overflow-hidden flex flex-col"
                 style={{ minHeight: 340 }}
               >
-                {/* Subtle blue glow top */}
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#0064DA] to-transparent" />
-                <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-32 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(0,100,218,0.18)" }} />
+                {/* Subtle pink glow top */}
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4007A] to-transparent" />
+                <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-32 rounded-full blur-3xl pointer-events-none" style={{ background: "rgba(212,0,122,0.18)" }} />
 
                 <div className="relative z-10 p-8 md:p-10 flex flex-col h-full">
                   {/* Badge */}
                   <div className="inline-flex items-center gap-2 mb-6 self-start">
-                    <div className="w-7 h-7 rounded-lg bg-[#0064DA] flex items-center justify-center">
+                    <div className="w-7 h-7 rounded-lg bg-[#D4007A] flex items-center justify-center">
                       <Sparkles size={13} className="text-white" />
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#0064DA]">Crewvoy AI Operator</span>
+                    <span className="text-xs font-bold uppercase tracking-[0.15em] text-[#D4007A]">Crewvoy AI Operator</span>
                   </div>
 
                   <h3 className="font-heading text-xl font-bold text-white mb-4">{s.name}</h3>
@@ -162,8 +162,8 @@ const RolesSection = () => {
                   <div className="flex flex-col gap-2">
                     {s.wins.map((win) => (
                       <div key={win} className="flex items-center gap-2">
-                        <div className="w-4 h-4 rounded-full bg-[#0064DA]/20 flex items-center justify-center flex-shrink-0">
-                          <Check size={9} className="text-[#0064DA]" />
+                        <div className="w-4 h-4 rounded-full bg-[#D4007A]/20 flex items-center justify-center flex-shrink-0">
+                          <Check size={9} className="text-[#D4007A]" />
                         </div>
                         <span className="text-xs text-white/60 font-medium">{win}</span>
                       </div>

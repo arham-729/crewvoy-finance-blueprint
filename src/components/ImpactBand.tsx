@@ -39,7 +39,7 @@ const ImpactBand = () => {
                 { v: <><CountUp to={50} suffix="+" /></>, l: "Workflows automated" },
               ].map((s, i) => (
                 <Reveal key={i} delay={0.1 + i * 0.05}>
-                  <div className="font-heading text-3xl md:text-4xl font-bold text-[#0064DA]">{s.v}</div>
+                  <div className="font-heading text-3xl md:text-4xl font-bold text-[#D4007A]">{s.v}</div>
                   <div className="text-xs font-semibold uppercase tracking-wider text-[#9AA0B4] mt-1">{s.l}</div>
                 </Reveal>
               ))}
