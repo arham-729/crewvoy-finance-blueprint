@@ -5,21 +5,18 @@ const logos = [
 
 const TrustLogos = () => {
   return (
-    <section className="py-16 border-y border-border/30 glass-effect-dark bg-card/30">
+    <section className="section-light py-14 border-y border-[#E8EAF0]">
       <div className="container-x px-6 md:px-10">
-        <p className="text-center text-xs font-bold uppercase tracking-[0.25em] text-foreground/50 mb-10">
+        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[#9AA0B4] mb-9">
           Stack we build on
         </p>
         <div className="overflow-hidden relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-card/30 to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-card/30 to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#F2F4F9] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#F2F4F9] to-transparent z-10 pointer-events-none" />
           <div className="flex logo-scroll">
             {[...logos, ...logos, ...logos].map((name, i) => (
-              <div 
-                key={i} 
-                className="flex-shrink-0 mx-10 flex items-center justify-center group hover:scale-110 transition-transform duration-300 cursor-pointer"
-              >
-                <span className="text-foreground/60 font-heading font-600 text-xl whitespace-nowrap group-hover:text-secondary transition-colors duration-300">
+              <div key={i} className="flex-shrink-0 mx-10 flex items-center justify-center">
+                <span className="text-[#9AA0B4] font-semibold text-base whitespace-nowrap hover:text-[#0064DA] transition-colors duration-300 cursor-default">
                   {name}
                 </span>
               </div>

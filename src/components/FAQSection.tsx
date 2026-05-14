@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const faqs = [
   {
@@ -28,52 +26,43 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <section className="section-padding bg-background border-t border-border/30 relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
-      
+    <section className="section-light section-padding">
       <div className="container-x grid lg:grid-cols-12 gap-12">
-        <motion.div 
+        <motion.div
           className="lg:col-span-4"
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -16 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="text-xs uppercase tracking-[0.25em] text-secondary mb-6 font-semibold">FAQ</div>
-          <h2 className="font-heading text-4xl md:text-5xl font-600 text-foreground leading-[1.1]">
-            Questions,<br /><span className="text-gradient-warm italic">answered.</span>
+          <span className="section-label">FAQ</span>
+          <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1117] leading-[1.1]">
+            Questions,<br />
+            <span className="italic font-light text-[#6B7280]">answered.</span>
           </h2>
         </motion.div>
-        
-        <motion.div 
+
+        <motion.div
           className="lg:col-span-8"
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 16 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <Accordion type="single" collapsible className="space-y-3">
+          <Accordion type="single" collapsible className="space-y-2">
             {faqs.map((faq, i) => (
-              <motion.div
+              <AccordionItem
                 key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
+                value={`item-${i}`}
+                className="bg-white border border-[#E8EAF0] rounded-xl px-6 data-[state=open]:border-[#0064DA]/30 data-[state=open]:shadow-sm transition-all duration-200"
               >
-                <AccordionItem
-                  value={`item-${i}`}
-                  className="glass-effect bg-card/50 border border-secondary/10 hover:border-secondary/30 rounded-lg px-6 data-[state=open]:border-secondary/40 data-[state=open]:bg-card/70 transition-all duration-300 group"
-                >
-                  <AccordionTrigger className="text-foreground font-heading font-600 text-left hover:no-underline text-base py-5 group-hover:text-gradient transition-all duration-300">
-                    {faq.q}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-foreground/60 leading-relaxed pb-5 group-open:text-foreground/70 transition-colors duration-300">
-                    {faq.a}
-                  </AccordionContent>
-                </AccordionItem>
-              </motion.div>
+                <AccordionTrigger className="text-[#0D1117] font-semibold text-left hover:no-underline text-sm py-5 hover:text-[#0064DA] transition-colors">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-[#6B7280] text-sm leading-relaxed pb-5">
+                  {faq.a}
+                </AccordionContent>
+              </AccordionItem>
             ))}
           </Accordion>
         </motion.div>

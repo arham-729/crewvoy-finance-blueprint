@@ -7,7 +7,7 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 30);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -21,86 +21,80 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? "glass-effect-dark border-b border-secondary/10" 
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/95 backdrop-blur-md border-b border-[#E8EAF0] shadow-sm"
           : "bg-transparent"
       }`}
     >
-      <div className="container-x px-6 md:px-10 flex items-center justify-between h-20">
-        <motion.a 
-          href="#" 
-          className="font-heading text-xl font-700 text-foreground tracking-tight"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          crewvoy<span className="text-gradient">.</span>
-        </motion.a>
+      <div className="container-x px-6 md:px-10 flex items-center justify-between py-4">
+        <a href="#" className="font-heading text-lg font-bold text-white">
+          crewvoy<span style={{ color: "#0064DA" }}>.</span>
+        </a>
 
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-9">
           {links.map((l, idx) => (
-            <motion.a 
-              key={l.label} 
+            <motion.a
+              key={l.label}
               href={l.href}
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              className="text-sm font-medium text-foreground/70 hover:text-secondary relative group transition-colors duration-300"
+              transition={{ delay: idx * 0.05 + 0.1 }}
+              className={`text-sm font-medium transition-colors duration-200 ${
+                scrolled ? "text-[#444] hover:text-[#0064DA]" : "text-white/80 hover:text-white"
+              }`}
             >
               {l.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-secondary to-blue-500 group-hover:w-full transition-all duration-300"></span>
             </motion.a>
           ))}
         </div>
 
-        <motion.a 
+        <a
           href="#booking"
-          whileHover={{ scale: 1.05, y: -2 }}
-          whileTap={{ scale: 0.95 }}
-          className="hidden md:inline-flex items-center gap-1.5 text-sm font-bold text-foreground bg-gradient-to-r from-secondary/10 to-blue-500/10 border border-secondary/30 hover:border-secondary/60 hover:shadow-lg hover:shadow-secondary/20 px-6 py-3 rounded-full transition-all duration-300"
+          className={`hidden md:inline-flex items-center gap-1.5 text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 ${
+            scrolled
+              ? "bg-[#0064DA] text-white hover:bg-[#0055BA]"
+              : "bg-white/10 text-white border border-white/25 hover:bg-white/20"
+          }`}
         >
-          Get in touch <ArrowUpRight size={14} />
-        </motion.a>
+          Get in touch <ArrowUpRight size={13} />
+        </a>
 
-        <motion.button 
-          className="md:hidden text-foreground" 
+        <button
+          className={`md:hidden transition-colors ${scrolled ? "text-[#333]" : "text-white"}`}
           onClick={() => setMobileOpen(!mobileOpen)}
-          whileTap={{ scale: 0.9 }}
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </motion.button>
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
       {mobileOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden glass-effect-dark border-t border-secondary/10 px-6 py-6 space-y-4"
+          className="md:hidden bg-white border-t border-[#E8EAF0] px-6 py-6 space-y-5"
         >
           {links.map((l) => (
-            <motion.a 
-              key={l.label} 
+            <a
+              key={l.label}
               href={l.href}
-              className="block text-foreground/80 text-sm font-medium hover:text-secondary transition-colors"
+              className="block text-[#444] text-sm font-medium hover:text-[#0064DA] transition-colors"
               onClick={() => setMobileOpen(false)}
-              whileHover={{ x: 4 }}
             >
               {l.label}
-            </motion.a>
+            </a>
           ))}
-          <motion.a 
+          <a
             href="#booking"
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-secondary border border-secondary/40 px-6 py-3 rounded-full hover:shadow-lg hover:shadow-secondary/20 transition-all duration-300"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold bg-[#0064DA] text-white px-5 py-2.5 rounded-lg"
             onClick={() => setMobileOpen(false)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
-            Get in touch <ArrowUpRight size={14} />
-          </motion.a>
+            Get in touch <ArrowUpRight size={13} />
+          </a>
         </motion.div>
       )}
     </motion.nav>
