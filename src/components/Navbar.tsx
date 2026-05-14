@@ -32,7 +32,7 @@ const Navbar = () => {
     >
       <div className="container-x px-6 md:px-10 flex items-center justify-between py-4">
         <a href="#" className="font-heading text-lg font-bold text-white">
-          crewvoy<span style={{ color: "#D4007A" }}>.</span>
+          crewvoy
         </a>
 
         <div className="hidden md:flex items-center gap-9">

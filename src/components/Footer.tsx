@@ -43,7 +43,7 @@ const Footer = () => {
 
         <div className="flex flex-col items-center gap-5 text-center">
           <p className="font-heading text-xl font-bold text-white">
-            crewvoy<span style={{ color: "#FC94AF" }}>.</span>
+            crewvoy
           </p>
           <div className="flex items-center gap-4">
             <a

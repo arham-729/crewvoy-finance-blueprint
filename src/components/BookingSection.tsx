@@ -114,7 +114,7 @@ const BookingSection = () => {
               <div className="relative z-10 flex flex-col h-full">
                 <div className="mb-8">
                   <p className="font-heading text-xl font-bold text-white mb-1">
-                    crewvoy<span style={{ color: "#FC94AF" }}>.</span>
+                    crewvoy
                   </p>
                   <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.35)" }}>Free Strategy Call</p>
                 </div>
