@@ -30,7 +30,7 @@ const Testimonials = () => {
         <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {testimonials.map((t, i) => (
             <StaggerItem key={i}>
-              <div className="card-surface-light card-hover p-8 md:p-10 h-full rounded-xl flex flex-col">
+              <div className="card-surface-light card-hover p-6 md:p-10 h-full rounded-xl flex flex-col">
                 <div className="text-[#D4007A] text-4xl font-heading leading-none mb-5 select-none opacity-30">"</div>
                 <p className="text-[#444B5A] text-sm leading-relaxed flex-1 mb-8">{t.quote}</p>
                 <div className="flex items-center gap-3 pt-6 border-t border-[#E8EAF0]">

@@ -31,7 +31,7 @@ const Navbar = () => {
       }`}
     >
       <div className="container-x px-6 md:px-10 flex items-center justify-between py-4">
-        <a href="#" className="font-heading text-lg font-bold text-white">
+        <a href="#" className={`font-heading text-lg font-bold transition-colors duration-300 ${scrolled ? "text-[#0D1117]" : "text-white"}`}>
           crewvoy
         </a>
 

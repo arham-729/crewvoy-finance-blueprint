@@ -45,7 +45,7 @@ const HowItWorks = () => {
             <ParallaxImage
               src={imgAutomation}
               alt="AI humanoid robot"
-              className="aspect-[16/7]"
+              className="aspect-[4/3] md:aspect-[16/7]"
               intensity={25}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0F1119]/60 via-transparent to-transparent" />
@@ -57,7 +57,7 @@ const HowItWorks = () => {
           {steps.map((step) => (
             <StaggerItem key={step.num}>
               <div
-                className="card-hover card-accent-top p-8 md:p-10 h-full rounded-xl"
+                className="card-hover card-accent-top p-6 md:p-10 h-full rounded-xl"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)" }}
               >
                 <p className="text-xs font-mono text-white/25 mb-7">{step.num}</p>

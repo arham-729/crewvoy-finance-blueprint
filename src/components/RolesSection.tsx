@@ -95,8 +95,8 @@ const RolesSection = () => {
         <div className="grid lg:grid-cols-12 gap-6 items-start">
 
           {/* Tab list — pill style */}
-          <div className="lg:col-span-3">
-            <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible -mx-6 lg:mx-0 px-6 lg:px-0 pb-2 lg:pb-0">
+          <div className="lg:col-span-3 -mx-6 px-6 lg:mx-0 lg:px-0 overflow-x-auto lg:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="flex lg:flex-col gap-2 pb-2 lg:pb-0 w-max lg:w-auto">
               {services.map((svc, i) => (
                 <motion.button
                   key={svc.id}
@@ -129,7 +129,7 @@ const RolesSection = () => {
           </div>
 
           {/* Cards */}
-          <div className="lg:col-span-9 grid md:grid-cols-2 gap-4">
+          <div className="lg:col-span-9 min-w-0 grid grid-cols-1 md:grid-cols-2 gap-4">
 
             {/* Crewvoy card */}
             <AnimatePresence mode="wait">
@@ -139,13 +139,12 @@ const RolesSection = () => {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.98 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="relative bg-[#0D1117] rounded-2xl overflow-hidden flex flex-col"
-                style={{ minHeight: 340 }}
+                className="relative bg-[#0D1117] rounded-2xl overflow-hidden flex flex-col min-h-[260px] md:min-h-[340px] min-w-0 w-full"
               >
                 {/* Subtle pink top line */}
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#FC94AF] to-transparent" />
 
-                <div className="relative z-10 p-8 md:p-10 flex flex-col h-full">
+                <div className="relative z-10 p-5 md:p-10 flex flex-col h-full">
                   {/* Badge */}
                   <div className="inline-flex items-center gap-2 mb-6 self-start">
                     <div className="w-7 h-7 rounded-lg bg-[#D4007A] flex items-center justify-center">
@@ -155,7 +154,7 @@ const RolesSection = () => {
                   </div>
 
                   <h3 className="font-heading text-xl font-bold text-white mb-4">{s.name}</h3>
-                  <p className="text-white/55 text-sm leading-relaxed flex-1 mb-8">{s.augmented}</p>
+                  <p className="text-white/55 text-sm leading-relaxed flex-1 mb-8 break-words">{s.augmented}</p>
 
                   {/* Win chips */}
                   <div className="flex flex-col gap-2">
@@ -180,13 +179,12 @@ const RolesSection = () => {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -10, scale: 0.98 }}
                 transition={{ duration: 0.35, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="relative bg-white rounded-2xl overflow-hidden flex flex-col border border-[#E8EAF0]"
-                style={{ minHeight: 340 }}
+                className="relative bg-white rounded-2xl overflow-hidden flex flex-col border border-[#E8EAF0] min-h-[260px] md:min-h-[340px] min-w-0 w-full"
               >
                 {/* Faded red top line */}
                 <div className="absolute top-0 left-0 right-0 h-px bg-[#E8EAF0]" />
 
-                <div className="relative z-10 p-8 md:p-10 flex flex-col h-full">
+                <div className="relative z-10 p-5 md:p-10 flex flex-col h-full">
                   {/* Badge */}
                   <div className="inline-flex items-center gap-2 mb-6 self-start">
                     <div className="w-7 h-7 rounded-lg bg-[#F2F4F9] flex items-center justify-center">
@@ -196,7 +194,7 @@ const RolesSection = () => {
                   </div>
 
                   <h3 className="font-heading text-xl font-bold text-[#C0C8D8] mb-4">{s.name}</h3>
-                  <p className="text-[#C0C8D8] text-sm leading-relaxed flex-1 mb-8">{s.normal}</p>
+                  <p className="text-[#C0C8D8] text-sm leading-relaxed flex-1 mb-8 break-words">{s.normal}</p>
 
                   {/* Pain chips */}
                   <div className="flex flex-col gap-2">

@@ -4,9 +4,11 @@ import { ArrowUpRight } from "lucide-react";
 import imgTeam from "@/assets/pics/image_six.jpeg";
 import imgDashboard from "@/assets/pics/image_two.jpeg";
 import { Reveal, CountUp, BlurReveal } from "./motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ImpactBand = () => {
   const ref = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const yLeft  = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const yRight = useTransform(scrollYProgress, [0, 1], [-30, 40]);
@@ -49,7 +51,7 @@ const ImpactBand = () => {
           <div className="lg:col-span-6 lg:col-start-7 grid grid-cols-2 gap-4">
             <BlurReveal delay={0.2}>
               <motion.div
-                style={{ y: yLeft }}
+                style={{ y: isMobile ? 0 : yLeft }}
                 className="aspect-[3/4] overflow-hidden rounded-2xl border border-[#E8EAF0] group cursor-pointer shadow-sm hover:shadow-lg transition-shadow duration-500"
               >
                 <img
@@ -62,8 +64,8 @@ const ImpactBand = () => {
             </BlurReveal>
             <BlurReveal delay={0.35}>
               <motion.div
-                style={{ y: yRight }}
-                className="aspect-[3/4] mt-10 overflow-hidden rounded-2xl border border-[#E8EAF0] group cursor-pointer shadow-sm hover:shadow-lg transition-shadow duration-500"
+                style={{ y: isMobile ? 0 : yRight }}
+                className="aspect-[3/4] mt-0 md:mt-10 overflow-hidden rounded-2xl border border-[#E8EAF0] group cursor-pointer shadow-sm hover:shadow-lg transition-shadow duration-500"
               >
                 <img
                   src={imgDashboard}

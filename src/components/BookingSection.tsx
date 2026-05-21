@@ -84,7 +84,7 @@ const BookingSection = () => {
 
   return (
     <section id="booking" className="section-white section-padding">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto px-4 md:px-0">
         {/* Header */}
         <div className="text-center mb-14">
           <span className="section-label">Book a call</span>
@@ -99,7 +99,7 @@ const BookingSection = () => {
           <div className="grid md:grid-cols-5">
 
             {/* ── Left panel — dark ── */}
-            <div className="md:col-span-2 relative flex flex-col p-9" style={{ background: "#0D1117" }}>
+            <div className="md:col-span-2 relative flex flex-col p-6 md:p-9" style={{ background: "#0D1117" }}>
 
               {step === "details" && (
                 <button

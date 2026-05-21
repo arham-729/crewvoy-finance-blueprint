@@ -62,7 +62,7 @@ const ValueProps = () => {
               intensity={30}
             />
           </Reveal>
-          <div className="lg:col-span-5 bg-[#F2F4F9] p-10 md:p-14 flex flex-col justify-center border-l border-[#E8EAF0]">
+          <div className="lg:col-span-5 bg-[#F2F4F9] p-8 md:p-14 flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-[#E8EAF0]">
             <Reveal delay={0.1}>
               <p className="text-xs font-semibold text-[#9AA0B4] mb-5 uppercase tracking-[0.15em]">Inside the operator stack</p>
               <h3 className="font-heading text-2xl md:text-3xl font-bold text-[#0D1117] mb-4 leading-snug">
@@ -81,7 +81,7 @@ const ValueProps = () => {
         <Stagger className="grid md:grid-cols-2 gap-4">
           {features.map((f) => (
             <StaggerItem key={f.num}>
-              <div className="card-surface card-hover card-accent-top p-10 md:p-12 h-full">
+              <div className="card-surface card-hover card-accent-top p-6 md:p-10 h-full">
                 <div className="flex items-start justify-between mb-10">
                   <div className="w-11 h-11 rounded-xl bg-[#FDF0F8] flex items-center justify-center">
                     <f.icon style={{ color: "#D4007A" }} size={19} />
