@@ -52,7 +52,26 @@ const HowItWorks = () => {
         </Reveal>
 
         {/* Step cards */}
-        <Stagger className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Mobile carousel */}
+        <div className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
+            {steps.map((step) => (
+              <div key={step.num} className="snap-center flex-shrink-0" style={{ width: "calc(100vw - 64px)" }}>
+                <div
+                  className="card-hover card-accent-top p-6 h-full rounded-xl"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)" }}
+                >
+                  <p className="text-xs font-mono text-white/25 mb-7">{step.num}</p>
+                  <h3 className="font-heading text-lg font-bold text-white mb-3">{step.title}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop grid */}
+        <Stagger className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {steps.map((step) => (
             <StaggerItem key={step.num}>
               <div

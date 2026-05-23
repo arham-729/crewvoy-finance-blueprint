@@ -76,7 +76,28 @@ const ValueProps = () => {
         </div>
 
         {/* Feature cards */}
-        <Stagger className="grid md:grid-cols-2 gap-4">
+        {/* Mobile carousel */}
+        <div className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
+            {features.map((f) => (
+              <div key={f.num} className="snap-center flex-shrink-0" style={{ width: "calc(100vw - 64px)" }}>
+                <div className="card-surface card-hover card-accent-top p-6 h-full">
+                  <div className="flex items-start justify-between mb-10">
+                    <div className="w-11 h-11 rounded-xl bg-[#FDF0F8] flex items-center justify-center">
+                      <f.icon style={{ color: "#D4007A" }} size={19} />
+                    </div>
+                    <span className="text-xs font-mono text-[#C0C5D5] font-semibold">{f.num}</span>
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-[#0D1117] mb-3">{f.title}</h3>
+                  <p className="text-[#6B7280] text-sm leading-relaxed">{f.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop grid */}
+        <Stagger className="hidden md:grid md:grid-cols-2 gap-4">
           {features.map((f) => (
             <StaggerItem key={f.num}>
               <div className="card-surface card-hover card-accent-top p-6 md:p-10 h-full">
