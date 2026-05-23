@@ -29,7 +29,7 @@ const ImpactBand = () => {
             </Reveal>
             <Reveal delay={0.2}>
               <p className="text-[#6B7280] leading-relaxed">
-                We measure ourselves in hours saved, leads converted and systems shipped — not headcount billed.
+                We measure ourselves in hours saved, leads converted and systems shipped, not headcount billed.
               </p>
             </Reveal>
 
@@ -37,8 +37,8 @@ const ImpactBand = () => {
               {[
                 { v: <><CountUp to={71} suffix="%" /></>, l: "Avg. cost reduction" },
                 { v: <><CountUp to={3} />×</>,           l: "Output per operator" },
-                { v: <><CountUp to={9} />d</>,            l: "Median deployment" },
-                { v: <><CountUp to={50} suffix="+" /></>, l: "Workflows automated" },
+                { v: <><CountUp to={7} />d</>,            l: "Median deployment" },
+                { v: <><CountUp to={20} suffix="+" /></>, l: "Workflows automated" },
               ].map((s, i) => (
                 <Reveal key={i} delay={0.1 + i * 0.05}>
                   <div className="font-heading text-3xl md:text-4xl font-bold text-[#D4007A]">{s.v}</div>

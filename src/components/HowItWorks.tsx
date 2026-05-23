@@ -6,11 +6,11 @@ const steps = [
   { num: "01", title: "Audit & architect",
     desc: "We map every workflow, identify automation surface area and architect an AI-augmented operating model tailored to your business." },
   { num: "02", title: "Deploy systems",
-    desc: "Custom chatbots, proprietary web systems and Make.com / n8n pipelines are built and wired into your existing stack — under one week." },
+    desc: "Custom worflows, pipelines, and automations are built and wired into your existing stack — under one week." },
   { num: "03", title: "Match the operator",
     desc: "We assign a senior operator trained on the systems we just built. They run the playbook, you keep judgement and approval." },
   { num: "04", title: "Scale & optimise",
-    desc: "Weekly KPI reviews, AI-generated dashboards and continuous system upgrades. Output compounds, overhead doesn't." },
+    desc: "Weekly KPI reviews, dashboards and continuous system upgrades. Output compounds, overhead doesn't." },
 ];
 
 const HowItWorks = () => {
@@ -32,8 +32,7 @@ const HowItWorks = () => {
           <div className="lg:col-span-5 lg:col-start-8 flex items-end">
             <Reveal delay={0.2}>
               <p className="text-white/50 text-lg leading-relaxed">
-                Four steps from your current chaos to a compounding,
-                AI-powered operating layer that runs without you.
+                Four steps from your current chaos to a compounding operating layer that runs without you.
               </p>
             </Reveal>
           </div>

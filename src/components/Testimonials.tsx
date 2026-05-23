@@ -1,51 +1,121 @@
-import { Reveal, Stagger, StaggerItem } from "./motion";
+import { motion } from "framer-motion";
+import { Reveal } from "./motion";
 
 const testimonials = [
-  { quote: "Crewvoy didn't just give us an operator — they re-architected our entire lead-to-cash motion. Our ops cost dropped 71% in the first quarter.", name: "Sarah Khan", role: "CEO, FinScale" },
-  { quote: "The AI + human combo is unreal. Tier-1 support resolved in seconds, escalations handled by someone who actually knows our product.", name: "Ali Raza", role: "Founder, PayBridge" },
-  { quote: "We replaced three roles with one Crewvoy operator and a stack of automations. Output went up, not down.", name: "Ahmed Hassan", role: "COO, LedgerFlow" },
-  { quote: "Their reporting layer alone is worth the engagement. We finally see what's actually happening in the business.", name: "Maria Chen", role: "CFO, GrowthPay" },
-  { quote: "Best decision we made this year. Felt like hiring an in-house ops team and an automation agency in one.", name: "Omar Farooq", role: "Director, CloudBooks" },
-  { quote: "Webflow rebuild shipped in 9 days. Looks like an agency built it. Cost a fraction.", name: "Jenna Park", role: "Head of Brand, Northwind" },
+  { quote: "Best decision we made this year. Felt like hiring an in house ops team and an automation agency in one. The value is insane.", name: "Joel Walton", role: "Director", company: "Vantara Group" },
+  { quote: "We replaced three roles with one Crewvoy associate and a stack of automations. Output went up, and we did surprisingly cut costs.", name: "Lucas Talley", role: "COO", company: "Meridian Ops" },
+  { quote: "They convinced us to switch from our placeholder VA to their operator and the difference was immediately obvious.", name: "Patricia Brown", role: "Founder", company: "Crestline Digital" },
+  { quote: "Onboarding was super easy. The output we got was far beyond expectations.", name: "Robert Murphy", role: "CEO", company: "Northfeld Inc." },
 ];
 
+const PINK = "#D4007A";
+
+const Avatar = ({ name }: { name: string }) => (
+  <div
+    className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+    style={{ background: `linear-gradient(135deg, ${PINK}, ${PINK}99)` }}
+  >
+    {name.split(" ").map(n => n[0]).join("")}
+  </div>
+);
+
+const RolePill = ({ role, company }: { role: string; company: string }) => (
+  <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mt-1"
+       style={{ background: `${PINK}18`, color: PINK, border: `1px solid ${PINK}30` }}>
+    {role} · {company}
+  </div>
+);
+
+const Card = ({
+  quote, name, role, company, className = "", large = false,
+}: {
+  quote: string; name: string; role: string; company: string; className?: string; large?: boolean;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+    className={`card-accent-top card-hover flex flex-col justify-between rounded-2xl p-8 relative overflow-hidden cursor-default ${className}`}
+    style={{
+      background: "rgba(255,255,255,0.04)",
+      border: "1px solid rgba(255,255,255,0.09)",
+    }}
+  >
+    <div className="relative z-10 flex-1">
+      <p className={`${large ? "text-xl md:text-2xl font-medium" : "text-sm"} text-white/80 leading-relaxed mb-8`}>
+        "{quote}"
+      </p>
+    </div>
+    <div className="relative z-10 flex items-center gap-3">
+      <Avatar name={name} />
+      <div>
+        <p className="text-sm font-bold text-white">{name}</p>
+        <RolePill role={role} company={company} />
+      </div>
+    </div>
+  </motion.div>
+);
+
 const Testimonials = () => {
+  const [t0, t1, t2, t3] = testimonials;
+
   return (
-    <section id="testimonials" className="section-light section-padding">
+    <section id="testimonials" className="section-darker section-padding overflow-hidden">
       <div className="container-x">
-        <div className="grid lg:grid-cols-12 gap-10 mb-16">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <span className="section-label">Clients</span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1117] leading-[1.1]">
-                Operators we've shipped.<br />
-                <span className="italic font-light text-[#6B7280]">Outcomes we've earned.</span>
-              </h2>
-            </Reveal>
+
+        {/* Header */}
+        <Reveal>
+          <div className="mb-14">
+            <span className="section-label-dark">Clients</span>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-[1.1]">
+              Real clients.<br />
+              <span className="italic font-light text-white/35">Real outcomes.</span>
+            </h2>
+          </div>
+        </Reveal>
+
+        {/* Desktop bento — fixed, no rotation */}
+        <div className="hidden md:grid grid-cols-12 gap-4" style={{ gridTemplateRows: "1fr 1fr" }}>
+          {/* Left tall card — spans 2 rows */}
+          <div className="col-span-5 row-span-2">
+            <Card quote={t0.quote} name={t0.name} role={t0.role} company={t0.company} className="h-full" large />
+          </div>
+          {/* Top right */}
+          <div className="col-span-7">
+            <Card quote={t1.quote} name={t1.name} role={t1.role} company={t1.company} className="h-full" />
+          </div>
+          {/* Bottom right split */}
+          <div className="col-span-4">
+            <Card quote={t2.quote} name={t2.name} role={t2.role} company={t2.company} className="h-full" />
+          </div>
+          <div className="col-span-3">
+            <Card quote={t3.quote} name={t3.name} role={t3.role} company={t3.company} className="h-full" />
           </div>
         </div>
 
-        <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {testimonials.map((t, i) => (
-            <StaggerItem key={i}>
-              <div className="card-surface-light card-hover p-6 md:p-10 h-full rounded-xl flex flex-col">
-                <div className="text-[#D4007A] text-4xl font-heading leading-none mb-5 select-none opacity-30">"</div>
-                <p className="text-[#444B5A] text-sm leading-relaxed flex-1 mb-8">{t.quote}</p>
-                <div className="flex items-center gap-3 pt-6 border-t border-[#E8EAF0]">
-                  <div className="w-9 h-9 rounded-full bg-[#FDF0F8] flex items-center justify-center text-[#D4007A] text-xs font-bold flex-shrink-0">
-                    {t.name.split(" ").map(n => n[0]).join("")}
-                  </div>
-                  <div>
-                    <p className="text-sm font-bold text-[#0D1117]">{t.name}</p>
-                    <p className="text-xs text-[#9AA0B4]">{t.role}</p>
-                  </div>
-                </div>
+        {/* Mobile horizontal snap carousel */}
+        <div className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
+            {testimonials.map((t, i) => (
+              <div key={i} className="snap-center flex-shrink-0" style={{ width: "calc(100vw - 64px)" }}>
+                <Card quote={t.quote} name={t.name} role={t.role} company={t.company} className="h-full" large={i === 0} />
               </div>
-            </StaggerItem>
+            ))}
+          </div>
+        </div>
+
+        {/* Dot indicators — mobile only */}
+        <div className="flex md:hidden justify-center gap-2 mt-5">
+          {testimonials.map((_, i) => (
+            <div
+              key={i}
+              className="w-1.5 h-1.5 rounded-full"
+              style={{ background: i === 0 ? "#D4007A" : "rgba(255,255,255,0.2)" }}
+            />
           ))}
-        </Stagger>
+        </div>
+
       </div>
     </section>
   );

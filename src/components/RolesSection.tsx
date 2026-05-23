@@ -5,13 +5,6 @@ import { Reveal } from "./motion";
 
 const services = [
   {
-    id: "lead-gen",
-    name: "Lead Generation",
-    augmented: "Operator deploys custom AI scrapers and outbound chatbots — qualified leads land in your CRM with enrichment, intent signals and a ready-to-send sequence. Human verifies fit before send.",
-    normal: "VA manually finds leads on LinkedIn, copies them into a sheet, and sends generic emails one by one.",
-    wins: ["AI-enriched CRM data", "24/7 outbound sequences", "Human-verified quality"],
-  },
-  {
     id: "web-dev",
     name: "Web Development",
     augmented: "Operator targets top-tier sites built on Webflow / Framer, uses AI to deconstruct structure and design, and rebuilds a tailored equivalent for your brand at a fraction of agency timelines.",
@@ -19,32 +12,18 @@ const services = [
     wins: ["Agency-quality output", "Fraction of timeline", "Brand-tailored design"],
   },
   {
-    id: "crm",
-    name: "CRM & Operations",
-    augmented: "Operator builds Make.com / n8n scenarios that auto-sync leads from ads, forms and calls into your CRM with deduplication, scoring and routing — running 24/7.",
-    normal: "VA logs into a tool every morning and types data from one tab into another.",
-    wins: ["Auto-sync pipelines", "Deduplication & scoring", "Runs while you sleep"],
-  },
-  {
     id: "reporting",
     name: "Reporting & Analytics",
-    augmented: "Weekly Loom walkthroughs paired with an AI-generated KPI dashboard — pipeline, conversion, ops health, all visualised. You see the truth, not the narrative.",
+    augmented: "Weekly Loom walkthroughs paired with an AI-generated KPI dashboard. Pipeline, conversion, ops health, all visualised. You see the truth, not the narrative.",
     normal: "Random Slack messages and unstructured text reports nobody reads.",
     wins: ["Live KPI dashboards", "Weekly Loom walkthroughs", "Full pipeline visibility"],
   },
   {
-    id: "support",
-    name: "Customer Support",
-    augmented: "AI chatbot handles tier-1 in seconds across email, chat and DMs. Operator handles edge cases and continuously trains the model on your voice.",
-    normal: "VA copy-pastes canned replies and forwards everything else to you.",
-    wins: ["Instant tier-1 resolution", "Omnichannel coverage", "Continuously self-improving"],
-  },
-  {
-    id: "content",
-    name: "Content & Social",
-    augmented: "Operator runs an AI content engine — research, draft, brand voice tuning, scheduling and analytics. You approve, system ships.",
-    normal: "VA rewrites trending posts and uploads them whenever they remember.",
-    wins: ["Full content pipeline", "On-brand tone at scale", "You approve, AI ships"],
+    id: "crm",
+    name: "CRM & Operations",
+    augmented: "Operator builds Make.com / n8n scenarios that auto-sync leads from ads, forms and calls into your CRM with deduplication, scoring and routing, running 24/7.",
+    normal: "VA logs into a tool every morning and types data from one tab into another.",
+    wins: ["Auto-sync pipelines", "Deduplication & scoring", "Runs while you sleep"],
   },
   {
     id: "bookkeeping",
@@ -59,6 +38,27 @@ const services = [
     augmented: "AI screens, scores and shortlists candidates from your ATS. Operator runs structured intake calls and books only the top 5% on your calendar.",
     normal: "VA forwards every résumé that comes in.",
     wins: ["AI-scored shortlists", "Top 5% on your calendar", "Structured intake calls"],
+  },
+  {
+    id: "lead-gen",
+    name: "Lead Generation",
+    augmented: "Operator deploys custom AI scrapers and outbound chatbots. Qualified leads land in your CRM with enrichment, intent signals and a ready-to-send sequence. Human verifies fit before send.",
+    normal: "VA manually finds leads on LinkedIn, copies them into a sheet, and sends generic emails one by one.",
+    wins: ["AI-enriched CRM data", "24/7 outbound sequences", "Human-verified quality"],
+  },
+  {
+    id: "support",
+    name: "Customer Support",
+    augmented: "AI chatbot handles tier-1 in seconds across email, chat and DMs. Operator handles edge cases and continuously trains the model on your voice.",
+    normal: "VA copy-pastes canned replies and forwards everything else to you.",
+    wins: ["Instant tier-1 resolution", "Omnichannel coverage", "Continuously self-improving"],
+  },
+  {
+    id: "content",
+    name: "Content & Social",
+    augmented: "Operator runs an AI content engine: research, draft, brand voice tuning, scheduling and analytics. You approve, system ships.",
+    normal: "VA rewrites trending posts and uploads them whenever they remember.",
+    wins: ["Full content pipeline", "On-brand tone at scale", "You approve, AI ships"],
   },
 ];
 

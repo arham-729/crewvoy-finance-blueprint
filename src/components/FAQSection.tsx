@@ -3,12 +3,12 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    q: "What exactly is a Crewvoy AI-Augmented Operator?",
-    a: "A senior remote operator paired with custom chatbots, proprietary web systems and automation workflows we build for your business. They run the playbook, AI handles the velocity, you keep the judgement.",
+    q: "What exactly is a crew member",
+    a: "Your new full-time remote operator paired with a stack of automations, worflows, and systems we build for your business. They run the playbook, AI handles the velocity, you keep the judgement.",
   },
   {
     q: "How is this different from hiring a normal VA?",
-    a: "A normal VA does tasks one by one. Our operators ship outcomes powered by automation that runs 24/7. You get agency-level output without agency-level overhead.",
+    a: "A normal VA does tasks one by one. Our operators ship outcomes powered by automation that runs 24/7 with human supervision. You get cutting edge output without the market overhead",
   },
   {
     q: "How fast can you deploy?",
@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "Will I own the systems you build?",
-    a: "Yes. All chatbots, scenarios, dashboards and web systems are yours. We architect them inside accounts you control.",
+    a: "Ownership of all created system resides with Crewvoy, fully accessible to you on retainer. The data however, will be owned by you.",
   },
   {
     q: "How does pricing work?",

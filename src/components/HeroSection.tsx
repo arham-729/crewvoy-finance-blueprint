@@ -67,7 +67,7 @@ const HeroSection = () => {
           </motion.p>
 
           <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-semibold text-white leading-[1.05] mb-7">
-            {["We engineer", "tomorrow's workforce."].map((line, i) => (
+            {["Next Gen", "Operators to Scale Your Business."].map((line, i) => (
               <span key={i} className="block overflow-hidden">
                 <motion.span
                   initial={{ y: "105%" }}
@@ -87,8 +87,7 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.7 }}
             className="text-white/55 text-lg md:text-xl max-w-xl leading-relaxed mb-10"
           >
-            Crewvoy fuses elite remote operators with custom chatbots, proprietary web systems and
-            deep automation — giving US-based SMBs agency-level output at 60–80% less overhead.
+            Crewvoy pairs elite technical operators with advanced automation systems, giving you agency level execution without the overhead.
           </motion.p>
 
           <motion.div
@@ -130,13 +129,6 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      <motion.div
-        animate={{ y: [0, 7, 0] }}
-        transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 text-white/30 text-xs uppercase tracking-[0.3em]"
-      >
-        scroll
-      </motion.div>
     </section>
   );
 };

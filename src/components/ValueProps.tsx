@@ -6,7 +6,7 @@ const features = [
   {
     icon: Cpu, num: "01",
     title: "AI-augmented operators",
-    desc: "Every operator is paired with custom chatbots and proprietary internal tools — so one person produces the output of an entire team.",
+    desc: "Our crew is backed by custom integrations, so each one manages complex workflows that traditionally require an entire department.",
   },
   {
     icon: Workflow, num: "02",
@@ -16,7 +16,7 @@ const features = [
   {
     icon: ShieldCheck, num: "03",
     title: "Human-in-the-loop QA",
-    desc: "AI handles velocity. A trained human verifies every decision before it ships — accuracy without bottlenecks.",
+    desc: "AI handles velocity. A trained human verifies every decision before it ships, accuracy without bottlenecks.",
   },
   {
     icon: Gauge, num: "04",
@@ -37,7 +37,7 @@ const ValueProps = () => {
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1117] leading-[1.1]">
-                We don't hire labor.<br />
+                We don't deploy labor.<br />
                 <span className="italic font-light text-[#6B7280]">We engineer leverage.</span>
               </h2>
             </Reveal>
@@ -45,8 +45,7 @@ const ValueProps = () => {
           <div className="lg:col-span-5 lg:col-start-8 flex items-end">
             <Reveal delay={0.2}>
               <p className="text-[#6B7280] text-lg leading-relaxed">
-                The era of bloated operations is over. Crewvoy replaces friction with high-performance
-                systems — built once, scaled infinitely.
+                The era of bloated operations is over. Crewvoy replaces friction with high performance systems — built once, scaled infinitely.
               </p>
             </Reveal>
           </div>
@@ -70,8 +69,7 @@ const ValueProps = () => {
                 <span className="italic font-light text-[#6B7280]">Infinite leverage.</span>
               </h3>
               <p className="text-[#6B7280] leading-relaxed text-sm">
-                Behind every Crewvoy operator sits a tailored stack of chatbots, scrapers, dashboards
-                and automations — the same tooling agencies sell at premium rates, embedded in your ops.
+                Behind every crew member sits an enterprise grade infrastructure of custom API integrations, automated data pipelines, proprietary scrapers, and unified operational dashboards. You get the elite technical architecture traditional agencies charge premiums for—permanently embedded into your business.
               </p>
             </Reveal>
           </div>
