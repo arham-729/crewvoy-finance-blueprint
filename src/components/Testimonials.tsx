@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useRef, useState, useCallback } from "react";
 import { Reveal } from "./motion";
 
 const testimonials = [
@@ -59,6 +60,16 @@ const Card = ({
 
 const Testimonials = () => {
   const [t0, t1, t2, t3] = testimonials;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.scrollWidth / testimonials.length;
+    const index = Math.round(el.scrollLeft / cardWidth);
+    setActiveIndex(Math.max(0, Math.min(index, testimonials.length - 1)));
+  }, []);
 
   return (
     <section id="testimonials" className="section-darker section-padding overflow-hidden">
@@ -95,7 +106,11 @@ const Testimonials = () => {
         </div>
 
         {/* Mobile horizontal snap carousel */}
-        <div className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        >
           <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
             {testimonials.map((t, i) => (
               <div key={i} className="snap-center flex-shrink-0" style={{ width: "calc(100vw - 64px)" }}>
@@ -110,8 +125,8 @@ const Testimonials = () => {
           {testimonials.map((_, i) => (
             <div
               key={i}
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: i === 0 ? "#D4007A" : "rgba(255,255,255,0.2)" }}
+              className="w-1.5 h-1.5 rounded-full transition-colors duration-300"
+              style={{ background: i === activeIndex ? "#D4007A" : "rgba(255,255,255,0.2)" }}
             />
           ))}
         </div>
