@@ -1,7 +1,6 @@
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
 import { CountUp } from "./motion";
 
 const HeroSection = () => {
@@ -35,7 +34,6 @@ const HeroSection = () => {
           muted
           playsInline
           preload="auto"
-          poster={heroBg}
           style={{
             position: "absolute",
             inset: 0,
