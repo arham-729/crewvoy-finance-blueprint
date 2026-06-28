@@ -1,118 +1,143 @@
+import { useRef } from "react";
 import { Cpu, Workflow, ShieldCheck, Gauge } from "lucide-react";
-import { Reveal, Stagger, StaggerItem, ParallaxImage } from "./motion";
-import imgOperator from "@/assets/pics/image_four.jpeg";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Reveal } from "./motion";
+import { WordReveal } from "./premium";
 
-const features = [
-  {
-    icon: Cpu, num: "01",
-    title: "AI-augmented operators",
-    desc: "Our crew is backed by custom integrations, so each one manages complex workflows that traditionally require an entire department.",
-  },
-  {
-    icon: Workflow, num: "02",
-    title: "Proprietary automation layer",
-    desc: "Make.com, n8n and bespoke web systems wired into your stack. Leads, ops and reporting move on rails, not in inboxes.",
-  },
-  {
-    icon: ShieldCheck, num: "03",
-    title: "Human-in-the-loop QA",
-    desc: "AI handles velocity. A trained human verifies every decision before it ships, accuracy without bottlenecks.",
-  },
-  {
-    icon: Gauge, num: "04",
-    title: "Engineered for scale",
-    desc: "Systems designed to absorb 10× volume without 10× headcount. Friction is removed, not relocated.",
-  },
+const pillars = [
+  { icon: Cpu,         num: "01", title: "AI-augmented operators",       desc: "Each operator manages workflows that traditionally require an entire department." },
+  { icon: Workflow,    num: "02", title: "Proprietary automation layer",  desc: "Make.com, n8n and bespoke systems wired in. Leads and ops move on rails." },
+  { icon: ShieldCheck, num: "03", title: "Human-in-the-loop QA",         desc: "AI handles velocity. A human verifies every decision before it ships." },
+  { icon: Gauge,       num: "04", title: "Engineered for scale",          desc: "Systems built to absorb 10× volume without 10× headcount." },
 ];
 
-const ValueProps = () => {
+// Fixed screen positions for each card (top/left/right/bottom CSS values)
+// and the direction they fly in from
+const SLOTS = [
+  { top: "18%", left: "12%",  fromX: -200, fromY: -150 }, // top-left
+  { top: "18%", right: "12%", fromX:  200, fromY: -150 }, // top-right
+  { bottom: "18%", left: "12%",  fromX: -200, fromY:  150 }, // bottom-left
+  { bottom: "18%", right: "12%", fromX:  200, fromY:  150 }, // bottom-right
+];
+
+const PillarCard = ({
+  pillar,
+  slot,
+  progress,
+  index,
+}: {
+  pillar: typeof pillars[0];
+  slot: typeof SLOTS[0];
+  progress: import("framer-motion").MotionValue<number>;
+  index: number;
+}) => {
+  const flyIn = 0.08 + index * 0.20;
+  const local = useTransform(progress, [flyIn, Math.min(flyIn + 0.14, 0.95)], [0, 1], { clamp: true });
+
+  const opacity = useTransform(local, [0, 0.5, 1], [0, 1, 1]);
+  const x       = useTransform(local, [0, 1], [slot.fromX, 0]);
+  const y       = useTransform(local, [0, 1], [slot.fromY, 0]);
+  const scale   = useTransform(local, [0, 1], [0.7, 1]);
+
   return (
-    <section id="approach" className="section-white section-padding">
-      <div className="container-x">
-        {/* Header */}
-        <div className="grid lg:grid-cols-12 gap-10 mb-20">
-          <div className="lg:col-span-5">
-            <Reveal>
-              <span className="section-label">Our approach</span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1117] leading-[1.1]">
-                We don't deploy labor.<br />
-                <span className="italic font-light text-[#6B7280]">We engineer leverage.</span>
-              </h2>
-            </Reveal>
+    <motion.div
+      style={{
+        opacity, x, y, scale,
+        position: "absolute",
+        top:    slot.top,
+        left:   slot.left,
+        right:  slot.right,
+        bottom: slot.bottom,
+        width:  240,
+      }}
+    >
+      <div
+        className="rounded-2xl px-5 py-5"
+        style={{
+          background: "rgba(255,255,255,0.97)",
+          border: "1px solid #E8EAF0",
+          boxShadow: "0 12px 40px rgba(0,0,0,0.08), 0 2px 8px rgba(212,0,122,0.07)",
+        }}
+      >
+        <div className="flex items-center gap-3 mb-3">
+          <span className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "#FDF0F8" }}>
+            <pillar.icon size={17} style={{ color: "#D4007A" }} />
+          </span>
+          <span className="font-mono text-[11px] font-bold text-[#D4007A]">{pillar.num}</span>
+        </div>
+        <p className="font-heading text-sm font-bold text-[#0D1117] leading-snug mb-2">{pillar.title}</p>
+        <p className="text-[#6B7280] text-xs leading-relaxed">{pillar.desc}</p>
+      </div>
+    </motion.div>
+  );
+};
+
+const ValueProps = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.06, 0.90, 0.98], [0, 1, 1, 0], { clamp: true });
+  const headlineScale   = useTransform(scrollYProgress, [0, 0.06], [0.92, 1], { clamp: true });
+
+  return (
+    <section id="approach" className="section-white">
+      {/* Static header */}
+      <div className="container-x section-padding pb-0">
+        <div className="grid lg:grid-cols-12 gap-10 mb-4">
+          <div className="lg:col-span-7">
+            <Reveal><span className="section-label">Our approach</span></Reveal>
+            <WordReveal
+              text="We don't deploy labor. We engineer leverage."
+              highlight={["engineer", "leverage."]}
+              highlightClassName="italic font-light text-[#6B7280]"
+              className="font-heading text-4xl md:text-6xl font-bold text-[#0D1117] leading-[1.05]"
+            />
           </div>
-          <div className="lg:col-span-5 lg:col-start-8 flex items-end">
+          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
             <Reveal delay={0.2}>
               <p className="text-[#6B7280] text-lg leading-relaxed">
-                The era of bloated operations is over. Crewvoy replaces friction with high performance systems — built once, scaled infinitely.
+                The era of bloated operations is over. Crewvoy replaces friction with high-performance systems — built once, scaled infinitely.
               </p>
             </Reveal>
           </div>
         </div>
+      </div>
 
-        {/* Image + copy split */}
-        <div className="grid lg:grid-cols-12 mb-5 rounded-2xl overflow-hidden border border-[#E8EAF0] shadow-sm">
-          <Reveal className="lg:col-span-7 overflow-hidden">
-            <ParallaxImage
-              src={imgOperator}
-              alt="AI operator stack"
-              className="aspect-[16/10] lg:aspect-auto h-full min-h-[380px]"
-              intensity={30}
+      {/* Pinned scroll scene */}
+      <div ref={ref} style={{ height: "550vh" }} className="relative">
+        <div className="sticky top-0 h-screen overflow-hidden">
+
+          {/* Centre headline */}
+          <motion.div
+            style={{ scale: headlineScale, opacity: headlineOpacity }}
+            className="absolute inset-0 flex items-center justify-center z-10 text-center px-6"
+          >
+            <h2 className="font-heading text-5xl md:text-7xl font-bold text-[#0D1117] leading-[1.03]">
+              What sets us<br />
+              <span className="italic font-light text-[#9AA0B4]">apart</span>
+            </h2>
+          </motion.div>
+
+          {/* 4 cards fly in from corners */}
+          {pillars.map((p, i) => (
+            <PillarCard
+              key={p.num}
+              pillar={p}
+              slot={SLOTS[i]}
+              progress={scrollYProgress}
+              index={i}
             />
-          </Reveal>
-          <div className="lg:col-span-5 bg-[#F2F4F9] p-8 md:p-14 flex flex-col justify-center border-t lg:border-t-0 lg:border-l border-[#E8EAF0]">
-            <Reveal delay={0.1}>
-              <p className="text-xs font-semibold text-[#9AA0B4] mb-5 uppercase tracking-[0.15em]">Inside the operator stack</p>
-              <h3 className="font-heading text-2xl md:text-3xl font-bold text-[#0D1117] mb-4 leading-snug">
-                One operator.<br />Ten systems.<br />
-                <span className="italic font-light text-[#6B7280]">Infinite leverage.</span>
-              </h3>
-              <p className="text-[#6B7280] leading-relaxed text-sm">
-                Behind every crew member sits an enterprise grade infrastructure of custom API integrations, automated data pipelines, proprietary scrapers, and unified operational dashboards. You get the elite technical architecture traditional agencies charge premiums for—permanently embedded into your business.
-              </p>
-            </Reveal>
-          </div>
-        </div>
-
-        {/* Feature cards */}
-        {/* Mobile carousel */}
-        <div className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
-            {features.map((f) => (
-              <div key={f.num} className="snap-center flex-shrink-0" style={{ width: "calc(100vw - 64px)" }}>
-                <div className="card-surface card-hover card-accent-top p-6 h-full">
-                  <div className="flex items-start justify-between mb-10">
-                    <div className="w-11 h-11 rounded-xl bg-[#FDF0F8] flex items-center justify-center">
-                      <f.icon style={{ color: "#D4007A" }} size={19} />
-                    </div>
-                    <span className="text-xs font-mono text-[#C0C5D5] font-semibold">{f.num}</span>
-                  </div>
-                  <h3 className="font-heading text-xl font-bold text-[#0D1117] mb-3">{f.title}</h3>
-                  <p className="text-[#6B7280] text-sm leading-relaxed">{f.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Desktop grid */}
-        <Stagger className="hidden md:grid md:grid-cols-2 gap-4">
-          {features.map((f) => (
-            <StaggerItem key={f.num}>
-              <div className="card-surface card-hover card-accent-top p-6 md:p-10 h-full">
-                <div className="flex items-start justify-between mb-10">
-                  <div className="w-11 h-11 rounded-xl bg-[#FDF0F8] flex items-center justify-center">
-                    <f.icon style={{ color: "#D4007A" }} size={19} />
-                  </div>
-                  <span className="text-xs font-mono text-[#C0C5D5] font-semibold">{f.num}</span>
-                </div>
-                <h3 className="font-heading text-xl font-bold text-[#0D1117] mb-3">{f.title}</h3>
-                <p className="text-[#6B7280] text-sm leading-relaxed">{f.desc}</p>
-              </div>
-            </StaggerItem>
           ))}
-        </Stagger>
+
+          {/* pink progress line */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-[#E8EAF0] z-30">
+            <motion.div style={{ scaleX: scrollYProgress }} className="absolute inset-0 bg-[#D4007A] origin-left" />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -10,23 +10,28 @@ import BookingSection from "@/components/BookingSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import { ScrollProgress } from "@/components/motion";
+import SmoothScroll from "@/components/SmoothScroll";
+import Cursor from "@/components/Cursor";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
-      <ScrollProgress />
-      <Navbar />
-      <HeroSection />
-      <TrustLogos />
-      <ValueProps />
-      <RolesSection />
-      <HowItWorks />
-      <ImpactBand />
-      <Testimonials />
-      <BookingSection />
-      <FAQSection />
-      <Footer />
-    </div>
+    <SmoothScroll>
+      <div className="min-h-screen">
+        <Cursor />
+        <ScrollProgress />
+        <Navbar />
+        <HeroSection />
+        <TrustLogos />
+        <ValueProps />
+        <RolesSection />
+        <HowItWorks />
+        <ImpactBand />
+        <Testimonials />
+        <BookingSection />
+        <FAQSection />
+        <Footer />
+      </div>
+    </SmoothScroll>
   );
 };
 

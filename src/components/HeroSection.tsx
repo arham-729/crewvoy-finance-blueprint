@@ -2,6 +2,7 @@ import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { CountUp } from "./motion";
+import { Magnetic } from "./premium";
 
 const HeroSection = () => {
   const ref = useRef<HTMLElement>(null);
@@ -96,9 +97,9 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.9 }}
             className="flex flex-wrap items-center gap-4"
           >
-            <a href="#booking" className="btn-coral">
+            <Magnetic href="#booking" className="btn-coral">
               Book a strategy call <ArrowUpRight size={15} />
-            </a>
+            </Magnetic>
             <a
               href="#services"
               className="inline-flex items-center gap-2 text-white/55 hover:text-white text-sm font-medium px-2 py-2 transition-colors duration-200"

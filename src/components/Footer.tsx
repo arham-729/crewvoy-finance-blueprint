@@ -1,5 +1,6 @@
 import { Linkedin, Mail, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Magnetic } from "./premium";
 
 const Footer = () => {
   return (
@@ -17,9 +18,9 @@ const Footer = () => {
               Ready to optimise<br />
               <span className="italic font-light text-white/40">your stack?</span>
             </motion.h3>
-            <a href="#booking" className="btn-coral">
+            <Magnetic href="#booking" className="btn-coral">
               Book a strategy call <ArrowUpRight size={15} />
-            </a>
+            </Magnetic>
           </div>
 
           <div className="lg:col-span-3 lg:col-start-8">

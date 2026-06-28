@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import imgTeam from "@/assets/pics/image_six.jpeg";
 import imgDashboard from "@/assets/pics/image_two.jpeg";
 import { Reveal, CountUp, BlurReveal } from "./motion";
+import { Magnetic, WordReveal } from "./premium";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const ImpactBand = () => {
@@ -21,12 +22,12 @@ const ImpactBand = () => {
             <Reveal>
               <span className="section-label">By the numbers</span>
             </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1117] leading-[1.1]">
-                Output that<br />
-                <span className="italic font-light text-[#6B7280]">compounds.</span>
-              </h2>
-            </Reveal>
+            <WordReveal
+              text="Output that compounds."
+              highlight={["compounds."]}
+              highlightClassName="italic font-light text-[#6B7280]"
+              className="font-heading text-4xl md:text-6xl font-bold text-[#0D1117] leading-[1.05]"
+            />
             <Reveal delay={0.2}>
               <p className="text-[#6B7280] leading-relaxed">
                 We measure ourselves in hours saved, leads converted and systems shipped, not headcount billed.
@@ -79,9 +80,9 @@ const ImpactBand = () => {
         </div>
 
         <Reveal className="mt-16 text-center">
-          <a href="#booking" className="btn-outline">
+          <Magnetic href="#booking" className="btn-outline">
             See what we'd ship for you <ArrowUpRight size={15} />
-          </a>
+          </Magnetic>
         </Reveal>
       </div>
     </section>

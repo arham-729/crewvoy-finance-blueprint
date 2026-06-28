@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
 import { Reveal } from "./motion";
+import { WordReveal } from "./premium";
 
 const testimonials = [
   { quote: "Best decision we made this year. Felt like hiring an in house ops team and an automation agency in one. The value is insane.", name: "Joel Walton", role: "Director", company: "Vantara Group" },
@@ -33,26 +34,31 @@ const Card = ({
   quote: string; name: string; role: string; company: string; className?: string; large?: boolean;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className={`card-accent-top card-hover flex flex-col justify-between rounded-2xl p-8 relative overflow-hidden cursor-default ${className}`}
-    style={{
-      background: "rgba(255,255,255,0.04)",
-      border: "1px solid rgba(255,255,255,0.09)",
-    }}
+    initial={{ opacity: 0, y: 50, rotateX: 10 }}
+    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+    viewport={{ once: true, margin: "-60px" }}
+    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+    style={{ perspective: 1000, transformStyle: "preserve-3d", transformOrigin: "center bottom" }}
+    className={`h-full ${className}`}
   >
-    <div className="relative z-10 flex-1">
-      <p className={`${large ? "text-xl md:text-2xl font-medium" : "text-sm"} text-white/80 leading-relaxed mb-8`}>
-        "{quote}"
-      </p>
-    </div>
-    <div className="relative z-10 flex items-center gap-3">
-      <Avatar name={name} />
-      <div>
-        <p className="text-sm font-bold text-white">{name}</p>
-        <RolePill role={role} company={company} />
+    <div
+      className="card-accent-top card-hover flex flex-col justify-between rounded-2xl p-8 relative overflow-hidden cursor-default h-full"
+      style={{
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.09)",
+      }}
+    >
+      <div className="relative z-10 flex-1">
+        <p className={`${large ? "text-xl md:text-2xl font-medium" : "text-sm"} text-white/80 leading-relaxed mb-8`}>
+          "{quote}"
+        </p>
+      </div>
+      <div className="relative z-10 flex items-center gap-3">
+        <Avatar name={name} />
+        <div>
+          <p className="text-sm font-bold text-white">{name}</p>
+          <RolePill role={role} company={company} />
+        </div>
       </div>
     </div>
   </motion.div>
@@ -76,15 +82,15 @@ const Testimonials = () => {
       <div className="container-x">
 
         {/* Header */}
-        <Reveal>
-          <div className="mb-14">
-            <span className="section-label-dark">Clients</span>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-[1.1]">
-              Real clients.<br />
-              <span className="italic font-light text-white/35">Real outcomes.</span>
-            </h2>
-          </div>
-        </Reveal>
+        <div className="mb-14">
+          <Reveal><span className="section-label-dark">Clients</span></Reveal>
+          <WordReveal
+            text="Real clients. Real outcomes."
+            highlight={["outcomes."]}
+            highlightClassName="italic font-light text-white/35"
+            className="font-heading text-4xl md:text-6xl font-bold text-white leading-[1.05]"
+          />
+        </div>
 
         {/* Desktop bento — fixed, no rotation */}
         <div className="hidden md:grid grid-cols-12 gap-4" style={{ gridTemplateRows: "1fr 1fr" }}>

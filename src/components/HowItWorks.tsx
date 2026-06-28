@@ -1,95 +1,212 @@
-import { ArrowUpRight } from "lucide-react";
+import { useRef } from "react";
+import { ArrowUpRight, Search, Boxes, UserCheck, TrendingUp } from "lucide-react";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { Magnetic } from "./premium";
 import imgAutomation from "@/assets/pics/image_three.jpeg";
-import { Reveal, Stagger, StaggerItem, ParallaxImage } from "./motion";
 
 const steps = [
-  { num: "01", title: "Audit & architect",
-    desc: "We map every workflow, identify automation surface area and architect an AI-augmented operating model tailored to your business." },
-  { num: "02", title: "Deploy systems",
-    desc: "Custom worflows, pipelines, and automations are built and wired into your existing stack — under one week." },
-  { num: "03", title: "Match the operator",
-    desc: "We assign a senior operator trained on the systems we just built. They run the playbook, you keep judgement and approval." },
-  { num: "04", title: "Scale & optimise",
-    desc: "Weekly KPI reviews, dashboards and continuous system upgrades. Output compounds, overhead doesn't." },
+  {
+    num: "01",
+    icon: Search,
+    title: "Audit & architect",
+    desc: "We map every workflow, identify automation surface area and architect an AI-augmented operating model tailored to your business.",
+  },
+  {
+    num: "02",
+    icon: Boxes,
+    title: "Deploy systems",
+    desc: "Custom workflows, pipelines, and automations are built and wired into your existing stack — under one week.",
+  },
+  {
+    num: "03",
+    icon: UserCheck,
+    title: "Match the operator",
+    desc: "We assign a senior operator trained on the systems we just built. They run the playbook, you keep judgement and approval.",
+  },
+  {
+    num: "04",
+    icon: TrendingUp,
+    title: "Scale & optimise",
+    desc: "Weekly KPI reviews, dashboards and continuous system upgrades. Output compounds, overhead doesn't.",
+  },
 ];
 
-const HowItWorks = () => {
+const N = steps.length;
+
+// Scroll budget: first slice reveals + breaks the headline,
+// the remaining track is split evenly across the 4 cards.
+// Cards begin while the headline is still settling, so the screen is never empty.
+const HEADLINE_END = 0.22;
+const CARDS_START = 0.24;
+const CARD_SPAN = (1 - CARDS_START) / N;
+
+const StepCard = ({
+  step,
+  i,
+  progress,
+}: {
+  step: typeof steps[0];
+  i: number;
+  progress: MotionValue<number>;
+}) => {
+  const start = CARDS_START + i * CARD_SPAN;
+  const end = start + CARD_SPAN * 0.7;
+  const local = useTransform(progress, [start, end], [0, 1], { clamp: true });
+
+  // alternate entry direction: even cards from left, odd from right
+  const fromX = i % 2 === 0 ? -120 : 120;
+
+  const opacity = useTransform(local, [0, 0.4, 1], [0, 1, 1]);
+  const x = useTransform(local, [0, 1], [fromX, 0]);
+  const y = useTransform(local, [0, 1], [60, 0]);
+  const scale = useTransform(local, [0, 1], [0.9, 1]);
+
+  const Icon = step.icon;
+
   return (
-    <section id="how-it-works" className="section-dark section-padding">
-      <div className="container-x">
-        <div className="grid lg:grid-cols-12 gap-10 mb-16">
-          <div className="lg:col-span-6">
-            <Reveal>
-              <span className="section-label-dark">Process</span>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-white leading-[1.1]">
-                From friction to<br />
-                <span className="italic font-light text-white/50">infinite scale.</span>
+    <motion.div
+      style={{ opacity, x, y, scale }}
+      className="group relative flex flex-col rounded-[28px] p-7 md:p-8 overflow-hidden"
+    >
+      <div
+        className="absolute inset-0 rounded-[28px]"
+        style={{
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.10)",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+        }}
+      />
+
+      {/* number watermark */}
+      <span
+        className="absolute -top-3 right-3 font-heading font-bold leading-none pointer-events-none select-none"
+        style={{ fontSize: "100px", color: "rgba(255,255,255,0.04)" }}
+      >
+        {step.num}
+      </span>
+
+      <div className="relative flex items-center gap-4 mb-5">
+        <span
+          className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-110"
+          style={{ background: "rgba(212,0,122,0.12)" }}
+        >
+          <Icon size={19} style={{ color: "#D4007A" }} />
+        </span>
+        <span className="font-mono text-xs font-bold tracking-wider text-[#D4007A]">
+          STEP {step.num}
+        </span>
+      </div>
+
+      <h3
+        className="relative font-heading font-bold leading-[1.08] mb-3 text-white"
+        style={{ fontSize: "clamp(22px, 2.2vw, 32px)" }}
+      >
+        {step.title}
+      </h3>
+
+      <p className="relative text-sm md:text-base leading-relaxed text-white/45">
+        {step.desc}
+      </p>
+    </motion.div>
+  );
+};
+
+const HowItWorks = () => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  // headline "breaks": the two halves slide apart and fade FULLY out
+  // before the cards arrive — no lingering, no overlap.
+  const leftX = useTransform(scrollYProgress, [0, HEADLINE_END], [0, -180], { clamp: true });
+  const rightX = useTransform(scrollYProgress, [0, HEADLINE_END], [0, 180], { clamp: true });
+  const headOpacity = useTransform(scrollYProgress, [0, HEADLINE_END * 0.45, HEADLINE_END], [1, 1, 0], { clamp: true });
+  const headScale = useTransform(scrollYProgress, [0, HEADLINE_END], [1, 0.7], { clamp: true });
+  // hard-hide the headline once faded so it can never bleed behind the cards
+  const headVisibility = useTransform(scrollYProgress, (p) => (p >= HEADLINE_END ? "hidden" : "visible"));
+
+  return (
+    <section id="how-it-works" className="section-dark">
+
+      {/* ── Static intro: header + robot image ── */}
+      <div className="container-x pt-20 pb-4">
+        <span className="block text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase mb-5">
+          Process
+        </span>
+        <div className="grid lg:grid-cols-12 gap-8 mb-10">
+          <div className="lg:col-span-7">
+            <h2 className="font-heading text-4xl md:text-6xl font-bold text-white leading-[1.05]">
+              From friction to{" "}
+              <span className="italic font-light text-white/40">infinite scale.</span>
+            </h2>
+          </div>
+          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
+            <p className="text-white/40 text-lg leading-relaxed">
+              Four steps from your current chaos to a compounding operating layer that runs without you.
+            </p>
+          </div>
+        </div>
+
+        <div className="overflow-hidden rounded-2xl">
+          <img
+            src={imgAutomation}
+            alt="AI operator"
+            style={{ height: "clamp(440px, 72vh, 820px)" }}
+            className="w-full object-cover"
+          />
+        </div>
+      </div>
+
+      {/* ── Pinned scroll scene: headline breaks, then cards reveal in sequence ── */}
+      <div ref={ref} style={{ height: "440vh" }} className="relative">
+        <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+          <div className="container-x w-full">
+
+            {/* Breaking headline — splits apart and fully fades before cards arrive */}
+            <motion.div
+              style={{ opacity: headOpacity, scale: headScale, visibility: headVisibility }}
+              className="absolute inset-0 z-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+            >
+              <span className="block text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase mb-6">
+                The 4-step system
+              </span>
+              <h2 className="font-heading font-bold text-white leading-[1.02] text-5xl md:text-7xl">
+                <motion.span style={{ x: leftX }} className="inline-block">
+                  Built once.
+                </motion.span>{" "}
+                <motion.span style={{ x: rightX }} className="inline-block italic font-light text-white/40">
+                  Scaled infinitely.
+                </motion.span>
               </h2>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-5 lg:col-start-8 flex items-end">
-            <Reveal delay={0.2}>
-              <p className="text-white/50 text-lg leading-relaxed">
-                Four steps from your current chaos to a compounding operating layer that runs without you.
-              </p>
-            </Reveal>
-          </div>
-        </div>
+            </motion.div>
 
-        {/* Image band */}
-        <Reveal className="mb-6">
-          <div className="relative overflow-hidden rounded-2xl group" style={{ border: "1px solid rgba(255,255,255,0.08)" }}>
-            <ParallaxImage
-              src={imgAutomation}
-              alt="AI humanoid robot"
-              className="aspect-[4/3] md:aspect-[16/7]"
-              intensity={25}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0F1119]/60 via-transparent to-transparent" />
-          </div>
-        </Reveal>
+            {/* 4 cards revealing one after another */}
+            <div className="relative z-10 grid md:grid-cols-2 gap-5 lg:gap-6 max-w-5xl mx-auto">
+              {steps.map((s, i) => (
+                <StepCard key={s.num} step={s} i={i} progress={scrollYProgress} />
+              ))}
+            </div>
 
-        {/* Step cards */}
-        {/* Mobile carousel */}
-        <div className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
-            {steps.map((step) => (
-              <div key={step.num} className="snap-center flex-shrink-0" style={{ width: "calc(100vw - 64px)" }}>
-                <div
-                  className="card-hover card-accent-top p-6 h-full rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)" }}
-                >
-                  <p className="text-xs font-mono text-white/25 mb-7">{step.num}</p>
-                  <h3 className="font-heading text-lg font-bold text-white mb-3">{step.title}</h3>
-                  <p className="text-white/50 text-sm leading-relaxed">{step.desc}</p>
-                </div>
-              </div>
-            ))}
+            {/* progress line */}
+            <div className="absolute bottom-8 left-0 right-0 h-px bg-white/10 z-30">
+              <motion.div
+                style={{ scaleX: scrollYProgress }}
+                className="absolute inset-0 bg-[#D4007A] origin-left"
+              />
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Desktop grid */}
-        <Stagger className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {steps.map((step) => (
-            <StaggerItem key={step.num}>
-              <div
-                className="card-hover card-accent-top p-6 md:p-10 h-full rounded-xl"
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)" }}
-              >
-                <p className="text-xs font-mono text-white/25 mb-7">{step.num}</p>
-                <h3 className="font-heading text-lg font-bold text-white mb-3">{step.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{step.desc}</p>
-              </div>
-            </StaggerItem>
-          ))}
-        </Stagger>
-
-        <div className="mt-14 text-center">
-          <a href="#booking" className="btn-coral">
-            Start your audit <ArrowUpRight size={15} />
-          </a>
+      {/* ── CTA ── */}
+      <div className="container-x py-16">
+        <div className="text-center">
+          <Magnetic href="#booking" className="btn-coral">
+            Engineer my workforce <ArrowUpRight size={15} />
+          </Magnetic>
         </div>
       </div>
     </section>

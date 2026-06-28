@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { WordReveal } from "./premium";
 
 const faqs = [
   {
@@ -36,10 +37,12 @@ const FAQSection = () => {
           transition={{ duration: 0.5 }}
         >
           <span className="section-label">FAQ</span>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-[#0D1117] leading-[1.1]">
-            Questions,<br />
-            <span className="italic font-light text-[#6B7280]">answered.</span>
-          </h2>
+          <WordReveal
+            text="Questions, answered."
+            highlight={["answered."]}
+            highlightClassName="italic font-light text-[#6B7280]"
+            className="font-heading text-4xl md:text-6xl font-bold text-[#0D1117] leading-[1.05]"
+          />
         </motion.div>
 
         <motion.div
