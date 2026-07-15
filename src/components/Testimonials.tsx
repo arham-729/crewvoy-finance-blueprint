@@ -44,11 +44,11 @@ const CompanyLogo = ({
       }}
       className="group flex items-center justify-center cursor-pointer"
     >
-      <div className="w-full h-[130px] md:h-[150px] rounded-2xl bg-white/5 border border-white/10 shadow-[0_6px_24px_rgba(0,0,0,0.24)] flex items-center justify-center px-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-white/20 group-hover:shadow-[0_16px_32px_rgba(0,0,0,0.32)]">
+      <div className="w-full h-[130px] md:h-[150px] rounded-2xl bg-[#FCFCFD] border border-[#E8EAEE] shadow-[0_6px_24px_rgba(16,24,40,0.05)] flex items-center justify-center px-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-[#D7DBE2] group-hover:shadow-[0_16px_32px_rgba(16,24,40,0.08)]">
         <motion.img
           src={company.logo}
           alt={company.name}
-          className="max-h-14 max-w-[70%] object-contain opacity-95"
+          className="max-h-14 max-w-[72%] object-contain opacity-95"
           style={{
             transformStyle: "preserve-3d",
           }}
@@ -71,8 +71,8 @@ const Testimonials = () => {
   return (
     <section ref={ref} id="testimonials" className="section-darker relative overflow-hidden py-20 md:py-24 px-6 md:px-10 min-h-[80vh]">
       <div className="absolute inset-0 pointer-events-none opacity-40">
-        <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-white/[0.03] blur-3xl" />
-        <div className="absolute right-10 bottom-16 h-80 w-80 rounded-full bg-white/[0.02] blur-3xl" />
+        <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-white/[0.025] blur-3xl" />
+        <div className="absolute right-10 bottom-16 h-80 w-80 rounded-full bg-white/[0.018] blur-3xl" />
       </div>
 
       <div className="container-x relative z-10">
@@ -86,7 +86,7 @@ const Testimonials = () => {
               <span className="font-black text-white">Companies </span>
               <span className="font-normal text-[#9AA0B4]">who trust us</span>
             </h2>
-            <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-xl">
+            <p className="mt-6 text-lg text-white leading-relaxed max-w-xl">
               Companies that trusted our work and chose us to deliver clean execution, faster turnarounds, and dependable systems.
             </p>
 
@@ -96,8 +96,8 @@ const Testimonials = () => {
                 "Systems that support speed without noise",
                 "Consistent execution across the stack",
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/70">
-                  <span className="h-2 w-2 rounded-full bg-[#D4007A] shrink-0" />
+                <div key={i} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm text-white">
+                  <span className="h-2 w-2 rounded-full shrink-0" style={{ backgroundColor: 'var(--pink)' }} />
                   <span>{item}</span>
                 </div>
               ))}
