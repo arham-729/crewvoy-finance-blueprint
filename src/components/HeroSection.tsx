@@ -101,7 +101,7 @@ const HeroSection = () => {
               Book a strategy call <ArrowUpRight size={15} />
             </Magnetic>
             <a
-              href="#services"
+              href="/services"
               className="inline-flex items-center gap-2 text-white/55 hover:text-white text-sm font-medium px-2 py-2 transition-colors duration-200"
             >
               Explore services <ArrowDown size={14} />

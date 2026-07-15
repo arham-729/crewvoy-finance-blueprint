@@ -28,7 +28,7 @@ const Footer = () => {
             <div className="space-y-3">
               {[
                 { label: "Approach", href: "#approach" },
-                { label: "Services", href: "#services" },
+                { label: "Services", href: "/services" },
                 { label: "How it works", href: "#how-it-works" },
                 { label: "Clients", href: "#testimonials" },
                 { label: "Book a call", href: "#booking" },

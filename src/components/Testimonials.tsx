@@ -1,142 +1,117 @@
-import { motion } from "framer-motion";
-import { useRef, useState, useCallback } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Reveal } from "./motion";
-import { WordReveal } from "./premium";
+import damanLogo from "@/assets/company_logos/daman.jpeg";
+import microsoftLogo from "@/assets/company_logos/microsoft.png";
+import mycoLogo from "@/assets/company_logos/myco.jpeg";
+import rapidevLogo from "@/assets/company_logos/rapidev.jpg";
+import serefinLogo from "@/assets/company_logos/serefin.jpeg";
+import xtremeLogo from "@/assets/company_logos/Xtremetv.jpg";
 
-const testimonials = [
-  { quote: "Best decision we made this year. Felt like hiring an in house ops team and an automation agency in one. The value is insane.", name: "Joel Walton", role: "Director", company: "Vantara Group" },
-  { quote: "We replaced three roles with one Crewvoy associate and a stack of automations. Output went up, and we did surprisingly cut costs.", name: "Lucas Talley", role: "COO", company: "Meridian Ops" },
-  { quote: "They convinced us to switch from our placeholder VA to their operator and the difference was immediately obvious.", name: "Patricia Brown", role: "Founder", company: "Crestline Digital" },
-  { quote: "Onboarding was super easy. The output we got was far beyond expectations.", name: "Robert Murphy", role: "CEO", company: "Northfeld Inc." },
+const companies = [
+  { id: 1, name: "Daman", logo: damanLogo },
+  { id: 2, name: "Microsoft", logo: microsoftLogo },
+  { id: 3, name: "MyCoIO", logo: mycoLogo },
+  { id: 4, name: "RapidEV", logo: rapidevLogo },
+  { id: 5, name: "Serefin", logo: serefinLogo },
+  { id: 6, name: "XtremeTV", logo: xtremeLogo },
 ];
 
-const PINK = "#D4007A";
-
-const Avatar = ({ name }: { name: string }) => (
-  <div
-    className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
-    style={{ background: `linear-gradient(135deg, ${PINK}, ${PINK}99)` }}
-  >
-    {name.split(" ").map(n => n[0]).join("")}
-  </div>
-);
-
-const RolePill = ({ role, company }: { role: string; company: string }) => (
-  <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold mt-1"
-       style={{ background: `${PINK}18`, color: PINK, border: `1px solid ${PINK}30` }}>
-    {role} · {company}
-  </div>
-);
-
-const Card = ({
-  quote, name, role, company, className = "", large = false,
+const CompanyLogo = ({
+  company,
+  index,
+  scrollYProgress,
 }: {
-  quote: string; name: string; role: string; company: string; className?: string; large?: boolean;
-}) => (
-  <motion.div
-    initial={{ opacity: 0, y: 50, rotateX: 10 }}
-    whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-    viewport={{ once: true, margin: "-60px" }}
-    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-    style={{ perspective: 1000, transformStyle: "preserve-3d", transformOrigin: "center bottom" }}
-    className={`h-full ${className}`}
-  >
-    <div
-      className="card-accent-top card-hover flex flex-col justify-between rounded-2xl p-8 relative overflow-hidden cursor-default h-full"
-      style={{
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid rgba(255,255,255,0.09)",
-      }}
-    >
-      <div className="relative z-10 flex-1">
-        <p className={`${large ? "text-xl md:text-2xl font-medium" : "text-sm"} text-white/80 leading-relaxed mb-8`}>
-          "{quote}"
-        </p>
-      </div>
-      <div className="relative z-10 flex items-center gap-3">
-        <Avatar name={name} />
-        <div>
-          <p className="text-sm font-bold text-white">{name}</p>
-          <RolePill role={role} company={company} />
-        </div>
-      </div>
-    </div>
-  </motion.div>
-);
-
-const Testimonials = () => {
-  const [t0, t1, t2, t3] = testimonials;
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const cardWidth = el.scrollWidth / testimonials.length;
-    const index = Math.round(el.scrollLeft / cardWidth);
-    setActiveIndex(Math.max(0, Math.min(index, testimonials.length - 1)));
-  }, []);
+  company: typeof companies[0];
+  index: number;
+  scrollYProgress: import("framer-motion").MotionValue<number>;
+}) => {
+  const driftDirection = index % 2 === 0 ? 1 : -1;
+  const scrollY = useTransform(scrollYProgress, [0, 1], [driftDirection * 8, driftDirection * -10]);
 
   return (
-    <section id="testimonials" className="section-darker section-padding overflow-hidden">
-      <div className="container-x">
+    <motion.div
+      initial={{ opacity: 0, y: 18, scale: 0.98 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{
+        duration: 0.7,
+        delay: index * 0.06,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      style={{
+        y: scrollY,
+      }}
+      className="group flex items-center justify-center cursor-pointer"
+    >
+      <div className="w-full h-[130px] md:h-[150px] rounded-2xl bg-white/5 border border-white/10 shadow-[0_6px_24px_rgba(0,0,0,0.24)] flex items-center justify-center px-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:border-white/20 group-hover:shadow-[0_16px_32px_rgba(0,0,0,0.32)]">
+        <motion.img
+          src={company.logo}
+          alt={company.name}
+          className="max-h-14 max-w-[70%] object-contain opacity-95"
+          style={{
+            transformStyle: "preserve-3d",
+          }}
+        />
+      </div>
+    </motion.div>
+  );
+};
 
-        {/* Header */}
-        <div className="mb-14">
-          <Reveal><span className="section-label-dark">Clients</span></Reveal>
-          <WordReveal
-            text="Real clients. Real outcomes."
-            highlight={["outcomes."]}
-            highlightClassName="italic font-light text-white/35"
-            className="font-heading text-4xl md:text-6xl font-bold text-white leading-[1.05]"
-          />
+const Testimonials = () => {
+  const ref = useRef<HTMLSection>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start center", "end center"],
+  });
+
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0.5, 1]);
+  const headerScale = useTransform(scrollYProgress, [0, 0.2], [0.9, 1]);
+
+  return (
+    <section ref={ref} id="testimonials" className="section-darker relative overflow-hidden py-20 md:py-24 px-6 md:px-10 min-h-[80vh]">
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute left-0 top-24 h-72 w-72 rounded-full bg-white/[0.03] blur-3xl" />
+        <div className="absolute right-10 bottom-16 h-80 w-80 rounded-full bg-white/[0.02] blur-3xl" />
+      </div>
+
+      <div className="container-x relative z-10">
+        <div className="grid lg:grid-cols-12 gap-16 items-start">
+          <motion.div
+            className="lg:col-span-4 lg:pt-8"
+            style={{ opacity: headerOpacity, scale: headerScale }}
+          >
+            <Reveal><span className="section-label-dark">Trusted By</span></Reveal>
+            <h2 className="font-heading text-[clamp(2.7rem,5vw,5rem)] leading-[0.92] tracking-[-0.09em] text-balance">
+              <span className="font-black text-white">Companies </span>
+              <span className="font-normal text-[#9AA0B4]">who trust us</span>
+            </h2>
+            <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-xl">
+              Companies that trusted our work and chose us to deliver clean execution, faster turnarounds, and dependable systems.
+            </p>
+
+            <div className="mt-10 grid gap-3 max-w-md">
+              {[
+                "Reliable environments for daily operations",
+                "Systems that support speed without noise",
+                "Consistent execution across the stack",
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/70">
+                  <span className="h-2 w-2 rounded-full bg-[#D4007A] shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <div className="lg:col-span-8 lg:pt-16">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-5 gap-y-8 md:gap-y-10 items-start">
+              {companies.map((company, i) => (
+                <CompanyLogo key={company.id} company={company} index={i} scrollYProgress={scrollYProgress} />
+              ))}
+            </div>
+          </div>
         </div>
-
-        {/* Desktop bento — fixed, no rotation */}
-        <div className="hidden md:grid grid-cols-12 gap-4" style={{ gridTemplateRows: "1fr 1fr" }}>
-          {/* Left tall card — spans 2 rows */}
-          <div className="col-span-5 row-span-2">
-            <Card quote={t0.quote} name={t0.name} role={t0.role} company={t0.company} className="h-full" large />
-          </div>
-          {/* Top right */}
-          <div className="col-span-7">
-            <Card quote={t1.quote} name={t1.name} role={t1.role} company={t1.company} className="h-full" />
-          </div>
-          {/* Bottom right split */}
-          <div className="col-span-4">
-            <Card quote={t2.quote} name={t2.name} role={t2.role} company={t2.company} className="h-full" />
-          </div>
-          <div className="col-span-3">
-            <Card quote={t3.quote} name={t3.name} role={t3.role} company={t3.company} className="h-full" />
-          </div>
-        </div>
-
-        {/* Mobile horizontal snap carousel */}
-        <div
-          ref={scrollRef}
-          onScroll={handleScroll}
-          className="md:hidden -mx-6 px-6 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-        >
-          <div className="flex gap-4 pb-2" style={{ width: "max-content" }}>
-            {testimonials.map((t, i) => (
-              <div key={i} className="snap-center flex-shrink-0" style={{ width: "calc(100vw - 64px)" }}>
-                <Card quote={t.quote} name={t.name} role={t.role} company={t.company} className="h-full" large={i === 0} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Dot indicators — mobile only */}
-        <div className="flex md:hidden justify-center gap-2 mt-5">
-          {testimonials.map((_, i) => (
-            <div
-              key={i}
-              className="w-1.5 h-1.5 rounded-full transition-colors duration-300"
-              style={{ background: i === activeIndex ? "#D4007A" : "rgba(255,255,255,0.2)" }}
-            />
-          ))}
-        </div>
-
       </div>
     </section>
   );

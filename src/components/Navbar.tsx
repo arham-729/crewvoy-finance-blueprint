@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -12,11 +13,13 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const sectionLink = (hash: string) => ({ pathname: "/", hash: `#${hash}` });
+
   const links = [
-    { label: "Services", href: "#services" },
-    { label: "Approach", href: "#approach" },
-    { label: "How it works", href: "#how-it-works" },
-    { label: "Clients", href: "#testimonials" },
+    { label: "Services", href: "/services" },
+    { label: "Approach", href: sectionLink("approach") },
+    { label: "How it works", href: sectionLink("how-it-works") },
+    { label: "Clients", href: sectionLink("testimonials") },
   ];
 
   return (
@@ -31,29 +34,26 @@ const Navbar = () => {
       }`}
     >
       <div className="container-x px-6 md:px-10 flex items-center justify-between py-4">
-        <a href="#" className={`font-heading text-lg font-bold transition-colors duration-300 ${scrolled ? "text-[#0D1117]" : "text-white"}`}>
+        <Link to="/" className={`font-heading text-lg font-bold transition-colors duration-300 ${scrolled ? "text-[#0D1117]" : "text-white"}`}>
           crewvoy
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-9">
           {links.map((l, idx) => (
-            <motion.a
+            <Link
               key={l.label}
-              href={l.href}
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 + 0.1 }}
+              to={l.href}
               className={`text-sm font-medium transition-colors duration-200 ${
                 scrolled ? "text-[#444] hover:text-[#D4007A]" : "text-white/80 hover:text-white"
               }`}
             >
               {l.label}
-            </motion.a>
+            </Link>
           ))}
         </div>
 
-        <a
-          href="#booking"
+        <Link
+          to={sectionLink("booking")}
           className={`hidden md:inline-flex items-center gap-1.5 text-sm font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 ${
             scrolled
               ? "bg-[#D4007A] text-white hover:bg-[#A8005F]"
@@ -61,7 +61,7 @@ const Navbar = () => {
           }`}
         >
           Get in touch <ArrowUpRight size={13} />
-        </a>
+        </Link>
 
         <button
           className={`md:hidden transition-colors ${scrolled ? "text-[#333]" : "text-white"}`}
@@ -79,22 +79,22 @@ const Navbar = () => {
           className="md:hidden bg-white border-t border-[#E8EAF0] px-6 py-6 space-y-5"
         >
           {links.map((l) => (
-            <a
+            <Link
               key={l.label}
-              href={l.href}
+              to={l.href}
               className="block text-[#444] text-sm font-medium hover:text-[#D4007A] transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#booking"
+          <Link
+            to={sectionLink("booking")}
             className="inline-flex items-center gap-1.5 text-sm font-semibold bg-[#D4007A] text-white px-5 py-2.5 rounded-lg"
             onClick={() => setMobileOpen(false)}
           >
             Get in touch <ArrowUpRight size={13} />
-          </a>
+          </Link>
         </motion.div>
       )}
     </motion.nav>
