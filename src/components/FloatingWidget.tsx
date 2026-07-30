@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export interface OrbitItem {
   emoji?: string;
@@ -58,12 +59,18 @@ const FloatingWidget = ({
   const ring0 = orbit.filter((o) => (o.ring ?? 0) === 0);
   const ring1 = orbit.filter((o) => o.ring === 1);
 
+  const isMobile = useIsMobile();
   const INNER_DUR = 22;
   const OUTER_DUR = 36;
+  const centerSize = isMobile ? 120 : 200;
+  const innerRadius = isMobile ? 80 : 135;
+  const outerRadius = isMobile ? 115 : 195;
+  const innerChipSize = isMobile ? 22 : 34;
+  const outerChipSize = isMobile ? 18 : 28;
 
   return (
     <div
-      className="relative w-full max-w-[420px] mx-auto aspect-square flex items-center justify-center select-none pointer-events-none"
+      className="relative w-full max-w-[260px] xs:max-w-[300px] md:max-w-[420px] mx-auto aspect-square flex items-center justify-center select-none pointer-events-none"
       style={{ perspective: 900 }}
     >
       {/* whole scene tilts in 3D as one unit — slow looping tilt */}
@@ -87,8 +94,8 @@ const FloatingWidget = ({
             alt={centerLabel}
             className="relative z-10"
             style={{
-              width: 200,
-              height: 200,
+              width: centerSize,
+              height: centerSize,
               objectFit: "contain",
               filter: "drop-shadow(0 16px 32px rgba(0,0,0,0.14))",
             }}
@@ -108,9 +115,9 @@ const FloatingWidget = ({
                   imgSrc={o.imgSrc}
                   label={o.label}
                   angle={(360 / Math.max(ring0.length, 1)) * i}
-                  radius={135}
+                  radius={innerRadius}
                   ringDuration={INNER_DUR}
-                  size={34}
+                  size={innerChipSize}
                   delay={i * 0.3}
                 />
               ))}
@@ -131,9 +138,9 @@ const FloatingWidget = ({
                   imgSrc={o.imgSrc}
                   label={o.label}
                   angle={(360 / Math.max(ring1.length, 1)) * i + 45}
-                  radius={195}
+                  radius={outerRadius}
                   ringDuration={-OUTER_DUR}
-                  size={28}
+                  size={outerChipSize}
                   delay={i * 0.5}
                 />
               ))}

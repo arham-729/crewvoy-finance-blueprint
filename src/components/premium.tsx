@@ -42,7 +42,7 @@ export const WordReveal = ({
         const clean = w.toLowerCase().replace(/[.,]/g, "");
         const isHi = hi.has(clean);
         return (
-          <span key={i} className="inline-block overflow-hidden align-bottom">
+          <span key={i} className="inline-block overflow-hidden align-bottom pb-[0.15em] -mb-[0.15em]">
             <motion.span
               variants={{
                 hidden: { y: "100%", opacity: 0 },

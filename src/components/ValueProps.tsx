@@ -3,6 +3,7 @@ import { X, Check } from "lucide-react";
 import { motion, useScroll, useTransform, useMotionValueEvent, MotionValue } from "framer-motion";
 import { Reveal } from "./motion";
 import { WordReveal } from "./premium";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 /**
  * framer-motion 12.38 doesn't reliably write plain numeric `opacity` onto a
@@ -79,6 +80,7 @@ const ListItem = ({
 
 const ValueProps = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -95,8 +97,9 @@ const ValueProps = () => {
 
   // Words: drift apart, then vanish
   const wordsOpacity = useTransform(scrollYProgress, [0, 0.03, 0.12, 0.16], [1, 1, 1, 0], { clamp: true });
-  const leftWordX    = useTransform(scrollYProgress, [0.06, 0.16], [0, -320], { clamp: true });
-  const rightWordX   = useTransform(scrollYProgress, [0.06, 0.16], [0, 320], { clamp: true });
+  const wordSplit     = isMobile ? 90 : 320;
+  const leftWordX    = useTransform(scrollYProgress, [0.06, 0.16], [0, -wordSplit], { clamp: true });
+  const rightWordX   = useTransform(scrollYProgress, [0.06, 0.16], [0, wordSplit], { clamp: true });
   // hard-hide once faded so the headline can never sit invisibly over the cards
   const wordsVisibility = useTransform(scrollYProgress, (p) => (p >= 0.16 ? "hidden" : "visible"));
 
@@ -105,11 +108,14 @@ const ValueProps = () => {
   const beforeScale   = useTransform(scrollYProgress, [0.14, 0.22], [0.92, 1], { clamp: true });
   // NOTE: -50% is the "centred" baseline (replaces Tailwind's -translate-x-1/2,
   // which Framer's `x` would otherwise overwrite on the same transform property).
-  const beforeX = useTransform(scrollYProgress, [0.48, 0.60], ["-50%", "-104%"], { clamp: true });
+  // On mobile the cards stack instead of sitting side-by-side, so Before slides up instead of left.
+  const beforeX = useTransform(scrollYProgress, [0.48, 0.60], ["-50%", isMobile ? "-50%" : "-104%"], { clamp: true });
+  const beforeY = useTransform(scrollYProgress, [0.48, 0.60], [0, isMobile ? -170 : 0], { clamp: true });
 
   // After card: slides in beside it once Before has moved aside
   const afterOpacity = useTransform(scrollYProgress, [0.50, 0.62], [0, 1], { clamp: true });
-  const afterX       = useTransform(scrollYProgress, [0.50, 0.62], ["12%", "4%"], { clamp: true });
+  const afterX       = useTransform(scrollYProgress, [0.50, 0.62], [isMobile ? "-50%" : "12%", isMobile ? "-50%" : "4%"], { clamp: true });
+  const afterY       = useTransform(scrollYProgress, [0.50, 0.62], [isMobile ? 170 : 0, isMobile ? 40 : 0], { clamp: true });
 
   const wordsOpacityRef  = useOpacityFix(wordsOpacity);
   const beforeOpacityRef = useOpacityFix(beforeOpacity);
@@ -149,7 +155,7 @@ const ValueProps = () => {
             style={{ visibility: wordsVisibility }}
             className="absolute inset-0 z-20 flex items-center justify-center px-6 pointer-events-none"
           >
-            <h2 className="font-heading text-5xl md:text-7xl font-bold text-[#0D1117] leading-[1.03] whitespace-nowrap">
+            <h2 className="font-heading text-3xl sm:text-5xl md:text-7xl font-bold text-[#0D1117] leading-[1.03] whitespace-nowrap">
               <motion.span style={{ x: leftWordX }} className="inline-block">
                 What sets us
               </motion.span>{" "}
@@ -160,46 +166,48 @@ const ValueProps = () => {
           </motion.div>
 
           {/* Card stage: both cards are centred, then pushed apart via x offsets */}
-          <div className="relative z-10 w-full max-w-5xl mx-auto px-6 h-[440px] md:h-[460px]">
-            {/* Before card — starts dead centre, slides to the left slot */}
+          <div className="relative z-10 w-full max-w-5xl mx-auto px-6 h-[360px] xs:h-[400px] md:h-[460px]">
+            {/* Before card — starts dead centre, slides to the left slot (up, on mobile) */}
             <motion.div
               ref={beforeOpacityRef}
               style={{
                 background: "#F1F1EE",
                 scale: beforeScale,
                 x: beforeX,
+                y: beforeY,
               }}
-              className="absolute top-0 left-1/2 w-[min(92vw,420px)] h-[440px] md:h-[460px] rounded-[28px] p-9 md:p-11 flex flex-col"
+              className="absolute top-0 left-1/2 w-[min(88vw,420px)] h-[360px] xs:h-[400px] md:h-[460px] rounded-[28px] p-6 sm:p-9 md:p-11 flex flex-col"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] mb-3" style={{ color: "#9AA0A0" }}>
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] mb-2 sm:mb-3" style={{ color: "#9AA0A0" }}>
                 Before
               </p>
-              <p className="font-heading text-2xl md:text-[28px] font-bold leading-[1.25] mb-10" style={{ color: "#A9ACA5" }}>
+              <p className="font-heading text-xl sm:text-2xl md:text-[28px] font-bold leading-[1.25] mb-5 sm:mb-10" style={{ color: "#A9ACA5" }}>
                 Guessing what actually moves the business.
               </p>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3 sm:gap-6">
                 {oldWay.map((text, i) => (
                   <ListItem key={i} text={text} bad progress={scrollYProgress} index={i} start={0.24} />
                 ))}
               </div>
             </motion.div>
 
-            {/* After card — slides in to the right slot */}
+            {/* After card — slides in to the right slot (down, on mobile) */}
             <motion.div
               ref={afterOpacityRef}
               style={{
                 background: "#0B0D14",
                 x: afterX,
+                y: afterY,
               }}
-              className="absolute top-0 left-1/2 w-[min(92vw,420px)] h-[440px] md:h-[460px] rounded-[28px] p-9 md:p-11 flex flex-col"
+              className="absolute top-0 left-1/2 w-[min(88vw,420px)] h-[360px] xs:h-[400px] md:h-[460px] rounded-[28px] p-6 sm:p-9 md:p-11 flex flex-col"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.15em] mb-3" style={{ color: "rgba(255,255,255,0.7)" }}>
+              <p className="text-xs font-semibold uppercase tracking-[0.15em] mb-2 sm:mb-3" style={{ color: "rgba(255,255,255,0.7)" }}>
                 After
               </p>
-              <p className="font-heading text-2xl md:text-[28px] font-bold leading-[1.25] mb-10 text-white">
+              <p className="font-heading text-xl sm:text-2xl md:text-[28px] font-bold leading-[1.25] mb-5 sm:mb-10 text-white">
                 Knowing exactly what sets you apart.
               </p>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3 sm:gap-6">
                 {newWay.map((text, i) => (
                   <ListItem key={i} text={text} bad={false} progress={scrollYProgress} index={i} start={0.60} />
                 ))}

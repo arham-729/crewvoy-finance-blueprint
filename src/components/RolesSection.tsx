@@ -187,38 +187,50 @@ const ServiceLayer = ({
   const textOpacity = useTransform(local, [0, 0.16, 0.84, 1], [0, 1, 1, 0]);
 
   return (
-    <div className="absolute inset-0 flex items-center pointer-events-none">
-      <div className="container-x w-full grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+    <div className="absolute inset-0 flex items-center pointer-events-none overflow-hidden">
+      <div className="container-x w-full grid lg:grid-cols-12 gap-4 md:gap-10 lg:gap-16 items-center px-4 md:px-6">
+        {/* Floating widget column — shown below text on mobile */}
+        <motion.div
+          style={{ opacity: widgetOpacity, scale: widgetScale }}
+          className="order-2 lg:order-2 lg:col-span-5 lg:col-start-8 will-change-transform"
+        >
+          <FloatingWidget
+            centerImg={s.centerImg}
+            centerLabel={s.centerLabel}
+            orbit={s.orbit}
+          />
+        </motion.div>
+
         {/* Text column */}
         <motion.div
           style={{ y: textY, opacity: textOpacity }}
-          className="lg:col-span-6 will-change-transform"
+          className="order-1 lg:order-1 lg:col-span-6 will-change-transform"
         >
-          <span className="block font-heading font-light text-[#D4007A] mb-3 tracking-wide" style={{ fontSize: 14 }}>
+          <span className="block font-heading font-light text-[#D4007A] mb-2 md:mb-3 tracking-wide text-xs md:text-sm">
             {String(i + 1).padStart(2, "0")} / {String(N).padStart(2, "0")}
           </span>
-          <span className="block font-heading text-4xl md:text-6xl font-bold text-[#0D1117] leading-[1.04] mb-7">
+          <span className="block font-heading text-2xl xs:text-3xl md:text-6xl font-bold text-[#0D1117] leading-[1.04] mb-3 md:mb-7">
             {s.name}
           </span>
-          <p className="text-[#374151] text-lg md:text-xl leading-relaxed max-w-xl mb-7">
+          <p className="text-[#374151] text-sm md:text-xl leading-relaxed max-w-xl mb-4 md:mb-7">
             {s.augmented}
           </p>
-          <div className="flex flex-wrap gap-2.5 mb-8">
+          <div className="flex flex-wrap gap-2 md:gap-2.5 mb-4 md:mb-8">
             {s.wins.map((win) => (
               <span
                 key={win}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-sm font-semibold"
+                className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-semibold"
                 style={{
                   background: "#FDF0F8",
                   color: "#D4007A",
                   border: "1px solid rgba(212,0,122,0.18)",
                 }}
               >
-                <Check size={13} /> {win}
+                <Check size={12} className="hidden md:inline" /><Check size={10} className="md:hidden" /> {win}
               </span>
             ))}
           </div>
-          <div className="flex items-start gap-3 max-w-lg">
+          <div className="hidden md:flex items-start gap-3 max-w-lg">
             <span className="mt-0.5 w-5 h-5 rounded-full bg-[#F2F4F9] flex items-center justify-center flex-shrink-0">
               <X size={11} className="text-[#B0B8CC]" />
             </span>
@@ -227,18 +239,6 @@ const ServiceLayer = ({
               {s.normal}
             </p>
           </div>
-        </motion.div>
-
-        {/* Floating widget column */}
-        <motion.div
-          style={{ opacity: widgetOpacity, scale: widgetScale }}
-          className="lg:col-span-5 lg:col-start-8 will-change-transform"
-        >
-          <FloatingWidget
-            centerImg={s.centerImg}
-            centerLabel={s.centerLabel}
-            orbit={s.orbit}
-          />
         </motion.div>
       </div>
     </div>

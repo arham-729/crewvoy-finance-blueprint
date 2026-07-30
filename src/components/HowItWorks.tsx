@@ -1,31 +1,28 @@
-import { useRef } from "react";
-import { ArrowUpRight, Search, Boxes, UserCheck, TrendingUp } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { Magnetic } from "./premium";
+import { useIsMobile } from "@/hooks/use-mobile";
 import imgAutomation from "@/assets/pics/image_three.jpeg";
 
 const steps = [
   {
     num: "01",
-    icon: Search,
     title: "Audit & architect",
     desc: "We map every workflow, identify automation surface area and architect an AI-augmented operating model tailored to your business.",
   },
   {
     num: "02",
-    icon: Boxes,
     title: "Deploy systems",
     desc: "Custom workflows, pipelines, and automations are built and wired into your existing stack — under one week.",
   },
   {
     num: "03",
-    icon: UserCheck,
     title: "Match the operator",
     desc: "We assign a senior operator trained on the systems we just built. They run the playbook, you keep judgement and approval.",
   },
   {
     num: "04",
-    icon: TrendingUp,
     title: "Scale & optimise",
     desc: "Weekly KPI reviews, dashboards and continuous system upgrades. Output compounds, overhead doesn't.",
   },
@@ -40,6 +37,45 @@ const HEADLINE_END = 0.22;
 const CARDS_START = 0.24;
 const CARD_SPAN = (1 - CARDS_START) / N;
 
+const StepCardInner = ({ step }: { step: typeof steps[0] }) => (
+  <>
+    <div
+      className="absolute inset-0 rounded-[28px]"
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.10)",
+        boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+      }}
+    />
+
+    {/* number watermark */}
+    <span
+      className="absolute -top-3 right-3 font-heading font-bold leading-none pointer-events-none select-none"
+      style={{ fontSize: "100px", color: "rgba(255,255,255,0.06)" }}
+    >
+      {step.num}
+    </span>
+
+    <div className="relative mb-5">
+      <span className="font-mono text-xs font-bold tracking-wider text-[#D4007A]">
+        STEP {step.num}
+      </span>
+    </div>
+
+    <h3
+      className="relative font-heading font-bold leading-[1.08] mb-3 text-white"
+      style={{ fontSize: "clamp(22px, 2.2vw, 32px)" }}
+    >
+      {step.title}
+    </h3>
+
+    <p className="relative text-sm md:text-base leading-relaxed text-white/45">
+      {step.desc}
+    </p>
+  </>
+);
+
+// Desktop: driven by the pinned-scroll progress value, alternating slide-in direction.
 const StepCard = ({
   step,
   i,
@@ -61,58 +97,36 @@ const StepCard = ({
   const y = useTransform(local, [0, 1], [60, 0]);
   const scale = useTransform(local, [0, 1], [0.9, 1]);
 
-  const Icon = step.icon;
-
   return (
     <motion.div
       style={{ opacity, x, y, scale }}
       className="group relative flex flex-col rounded-[28px] p-7 md:p-8 overflow-hidden"
     >
-      <div
-        className="absolute inset-0 rounded-[28px]"
-        style={{
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.10)",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
-        }}
-      />
-
-      {/* number watermark */}
-      <span
-        className="absolute -top-3 right-3 font-heading font-bold leading-none pointer-events-none select-none"
-        style={{ fontSize: "100px", color: "rgba(255,255,255,0.04)" }}
-      >
-        {step.num}
-      </span>
-
-      <div className="relative flex items-center gap-4 mb-5">
-        <span
-          className="w-11 h-11 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-110"
-          style={{ background: "rgba(212,0,122,0.12)" }}
-        >
-          <Icon size={19} style={{ color: "#D4007A" }} />
-        </span>
-        <span className="font-mono text-xs font-bold tracking-wider text-[#D4007A]">
-          STEP {step.num}
-        </span>
-      </div>
-
-      <h3
-        className="relative font-heading font-bold leading-[1.08] mb-3 text-white"
-        style={{ fontSize: "clamp(22px, 2.2vw, 32px)" }}
-      >
-        {step.title}
-      </h3>
-
-      <p className="relative text-sm md:text-base leading-relaxed text-white/45">
-        {step.desc}
-      </p>
+      <StepCardInner step={step} />
     </motion.div>
   );
 };
 
+// Mobile: horizontal swipe carousel — one card per screen, native scroll-snap.
+const StepCardMobile = ({ step }: { step: typeof steps[0] }) => (
+  <div className="snap-center shrink-0 w-full px-6 box-border">
+    <div className="relative flex flex-col rounded-[28px] p-7 overflow-hidden">
+      <StepCardInner step={step} />
+    </div>
+  </div>
+);
+
 const HowItWorks = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [activeCard, setActiveCard] = useState(0);
+
+  const onTrackScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    setActiveCard(Math.round(el.scrollLeft / el.clientWidth));
+  };
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -120,7 +134,7 @@ const HowItWorks = () => {
   });
 
   // headline "breaks": the two halves slide apart and fade FULLY out
-  // before the cards arrive — no lingering, no overlap.
+  // before the cards arrive — no lingering, no overlap. (Desktop only.)
   const leftX = useTransform(scrollYProgress, [0, HEADLINE_END], [0, -180], { clamp: true });
   const rightX = useTransform(scrollYProgress, [0, HEADLINE_END], [0, 180], { clamp: true });
   const headOpacity = useTransform(scrollYProgress, [0, HEADLINE_END * 0.45, HEADLINE_END], [1, 1, 0], { clamp: true });
@@ -132,7 +146,7 @@ const HowItWorks = () => {
     <section id="how-it-works" className="section-dark">
 
       {/* ── Static intro: header + robot image ── */}
-      <div className="container-x pt-20 pb-4">
+      <div className="container-x pt-20 pb-4 px-6 md:px-10">
         <span className="block text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase mb-5">
           Process
         </span>
@@ -154,55 +168,96 @@ const HowItWorks = () => {
           <img
             src={imgAutomation}
             alt="AI operator"
-            style={{ height: "clamp(440px, 72vh, 820px)" }}
+            style={{ height: "clamp(240px, 55vh, 820px)" }}
             className="w-full object-cover"
           />
         </div>
       </div>
 
-      {/* ── Pinned scroll scene: headline breaks, then cards reveal in sequence ── */}
-      <div ref={ref} style={{ height: "440vh" }} className="relative">
-        <div className="sticky top-0 h-screen overflow-hidden flex items-center">
-          <div className="container-x w-full">
+      {isMobile ? (
+        /* ── Mobile: swipeable carousel, one card per screen ── */
+        <div className="py-10">
+          <div className="text-center mb-8 px-6">
+            <span className="block text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase mb-4">
+              The 4-step system
+            </span>
+            <h2 className="font-heading font-bold text-white leading-[1.05] text-3xl">
+              Built once.{" "}
+              <span className="italic font-light text-white/40">Scaled infinitely.</span>
+            </h2>
+            <p className="text-white/30 text-xs mt-4 tracking-wide">Swipe to see each step →</p>
+          </div>
 
-            {/* Breaking headline — splits apart and fully fades before cards arrive */}
-            <motion.div
-              style={{ opacity: headOpacity, scale: headScale, visibility: headVisibility }}
-              className="absolute inset-0 z-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
-            >
-              <span className="block text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase mb-6">
-                The 4-step system
-              </span>
-              <h2 className="font-heading font-bold text-white leading-[1.02] text-5xl md:text-7xl">
-                <motion.span style={{ x: leftX }} className="inline-block">
-                  Built once.
-                </motion.span>{" "}
-                <motion.span style={{ x: rightX }} className="inline-block italic font-light text-white/40">
-                  Scaled infinitely.
-                </motion.span>
-              </h2>
-            </motion.div>
+          <div
+            ref={trackRef}
+            onScroll={onTrackScroll}
+            className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+            style={{ scrollbarWidth: "none" }}
+          >
+            {steps.map((s) => (
+              <StepCardMobile key={s.num} step={s} />
+            ))}
+          </div>
 
-            {/* 4 cards revealing one after another */}
-            <div className="relative z-10 grid md:grid-cols-2 gap-5 lg:gap-6 max-w-5xl mx-auto">
-              {steps.map((s, i) => (
-                <StepCard key={s.num} step={s} i={i} progress={scrollYProgress} />
-              ))}
-            </div>
-
-            {/* progress line */}
-            <div className="absolute bottom-8 left-0 right-0 h-px bg-white/10 z-30">
-              <motion.div
-                style={{ scaleX: scrollYProgress }}
-                className="absolute inset-0 bg-[#D4007A] origin-left"
+          {/* dot indicators */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {steps.map((s, i) => (
+              <span
+                key={s.num}
+                className="h-1.5 rounded-full transition-all duration-300"
+                style={{
+                  width: i === activeCard ? 20 : 6,
+                  background: i === activeCard ? "#D4007A" : "rgba(255,255,255,0.2)",
+                }}
               />
+            ))}
+          </div>
+        </div>
+      ) : (
+        /* ── Desktop: pinned scroll scene — headline breaks, then cards reveal in sequence ── */
+        <div ref={ref} style={{ height: "440vh" }} className="relative">
+          <div className="sticky top-0 h-screen overflow-hidden flex items-center">
+            <div className="container-x w-full px-6 md:px-10">
+
+              {/* Breaking headline — splits apart and fully fades before cards arrive */}
+              <motion.div
+                style={{ opacity: headOpacity, scale: headScale, visibility: headVisibility }}
+                className="absolute inset-0 z-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+              >
+                <span className="block text-[10px] font-bold tracking-[0.2em] text-white/40 uppercase mb-6">
+                  The 4-step system
+                </span>
+                <h2 className="font-heading font-bold text-white leading-[1.02] text-5xl md:text-7xl">
+                  <motion.span style={{ x: leftX }} className="inline-block">
+                    Built once.
+                  </motion.span>{" "}
+                  <motion.span style={{ x: rightX }} className="inline-block italic font-light text-white/40">
+                    Scaled infinitely.
+                  </motion.span>
+                </h2>
+              </motion.div>
+
+              {/* 4 cards revealing one after another */}
+              <div className="relative z-10 grid md:grid-cols-2 gap-5 lg:gap-6 max-w-5xl mx-auto">
+                {steps.map((s, i) => (
+                  <StepCard key={s.num} step={s} i={i} progress={scrollYProgress} />
+                ))}
+              </div>
+
+              {/* progress line */}
+              <div className="absolute bottom-8 left-0 right-0 h-px bg-white/10 z-30">
+                <motion.div
+                  style={{ scaleX: scrollYProgress }}
+                  className="absolute inset-0 bg-[#D4007A] origin-left"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ── CTA ── */}
-      <div className="container-x py-16">
+      <div className="container-x py-16 px-6 md:px-10">
         <div className="text-center">
           <Magnetic href="#booking" className="btn-coral">
             Engineer my workforce <ArrowUpRight size={15} />
