@@ -21,12 +21,12 @@ const Index = () => {
         <ScrollProgress />
         <Navbar />
         <HeroSection />
-        <Testimonials />
+        <TrustLogos />
         <ValueProps />
         <RolesSection />
         <HowItWorks />
         <ImpactBand />
-        <TrustLogos />
+        <Testimonials />
         <BookingSection />
         <FAQSection />
         <Footer />
