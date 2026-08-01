@@ -8,18 +8,18 @@ import imgAutomation from "@/assets/pics/image_three.jpeg";
 const steps = [
   {
     num: "01",
-    title: "Audit & architect",
-    desc: "We map every workflow, identify automation surface area and architect an AI-augmented operating model tailored to your business.",
+    title: "Audit",
+    desc: "Crewvoy conducts a comprehensive operational audit to map your workflows, bottleneck revenue streams, and pinpoint high ROI leverage points.",
   },
   {
     num: "02",
     title: "Deploy systems",
-    desc: "Custom workflows, pipelines, and automations are built and wired into your existing stack — under one week.",
+    desc: "Custom workflows, pipelines, and automations are built and wired into your existing stack.",
   },
   {
     num: "03",
     title: "Match the operator",
-    desc: "We assign a senior operator trained on the systems we just built. They run the playbook, you keep judgement and approval.",
+    desc: "We assign a senior operator trained on the systems we just built. They now serve as your full time employee.",
   },
   {
     num: "04",

@@ -33,7 +33,7 @@ const services: Service[] = [
     augmented:
       "Operators leverage AI stacks including Framer/Webflow to design and ship websites for your business at industry leading levels.Frontend, backend, and maintenance all handled by Crewvoy.",
     normal: "VA prompts ChatGPT / Claude to spit out a generic site and ships it as-is.",
-    wins: ["Agency-quality output", "Fraction of timeline", "Brand-tailored design"],
+    wins: ["Agency-level output", "Fraction of timeline", "Brand-tailored design"],
     centerImg: imgLaptop,
     centerLabel: "Web Development",
     orbit: [
@@ -65,7 +65,7 @@ const services: Service[] = [
     id: "crm",
     name: "CRM & Operations",
     augmented:
-      "Operator builds Make.com / n8n scenarios that auto-sync leads from ads, forms and calls into your CRM with deduplication, scoring and routing, running 24/7.",
+      "Operator builds n8n scenarios that auto-sync leads from ads, forms and calls into your CRM with deduplication, scoring and routing, running 24/7.",
     normal: "VA logs into a tool every morning and types data from one tab into another.",
     wins: ["Auto-sync pipelines", "Deduplication & scoring", "Runs while you sleep"],
     centerImg: imgGear,
