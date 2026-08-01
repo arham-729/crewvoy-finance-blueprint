@@ -10,10 +10,17 @@ import imgChart from "../assets/widgets/icons8-chart-3d-512.png";
 import imgGear from "../assets/widgets/icons8-workflow-3d-512.png";
 import imgWallet from "../assets/widgets/icons8-wallet-3d-512.png";
 import imgPeople from "../assets/widgets/icons8-people-3d-512.png";
-import imgResume from "../assets/widgets/icons8-resume-94.png";
 import imgTarget from "../assets/widgets/icons8-target-3d-512.png";
 import imgHeadphones from "../assets/widgets/icons8-headset-3d-512.png";
 import imgPencil from "../assets/widgets/icons8-pencil-3d-512.png";
+import imgWebDev from "../assets/services/web.jpg";
+import imgReporting from "../assets/services/reportingandanalytics.jpg";
+import imgCrm from "../assets/services/crmandoperations.jpg";
+import imgBookkeeping from "../assets/services/bookingandadmin.jpg";
+import imgHR from "../assets/services/HR.jpg";
+import imgLeadGen from "../assets/services/leadgen.jpg";
+import imgSupport from "../assets/services/customersupport.jpg";
+import imgContent from "../assets/services/contentandsocialmedia.jpg";
 
 interface Service {
   id: string;
@@ -24,6 +31,7 @@ interface Service {
   centerImg: string;
   centerLabel: string;
   orbit: OrbitItem[];
+  image?: string;
 }
 
 const services: Service[] = [
@@ -36,13 +44,8 @@ const services: Service[] = [
     wins: ["Agency-level output", "Fraction of timeline", "Brand-tailored design"],
     centerImg: imgLaptop,
     centerLabel: "Web Development",
-    orbit: [
-      { emoji: "🎨", label: "Design", ring: 0 },
-      { emoji: "⚛️", label: "React", ring: 0 },
-      { emoji: "🌐", label: "Webflow", ring: 0 },
-      { emoji: "✨", label: "Framer", ring: 1 },
-      { emoji: "📱", label: "Responsive", ring: 1 },
-    ],
+    orbit: [],
+    image: imgWebDev,
   },
   {
     id: "reporting",
@@ -53,13 +56,8 @@ const services: Service[] = [
     wins: ["Live KPI dashboards", "Weekly Loom walkthroughs", "Full pipeline visibility"],
     centerImg: imgChart,
     centerLabel: "Analytics",
-    orbit: [
-      { emoji: "📈", label: "Growth", ring: 0 },
-      { emoji: "🔍", label: "Insights", ring: 0 },
-      { emoji: "🎯", label: "KPIs", ring: 0 },
-      { emoji: "📉", label: "Trends", ring: 1 },
-      { emoji: "🗂️", label: "Reports", ring: 1 },
-    ],
+    orbit: [],
+    image: imgReporting,
   },
   {
     id: "crm",
@@ -70,13 +68,8 @@ const services: Service[] = [
     wins: ["Auto-sync pipelines", "Deduplication & scoring", "Runs while you sleep"],
     centerImg: imgGear,
     centerLabel: "CRM & Ops",
-    orbit: [
-      { emoji: "🔄", label: "Automation", ring: 0 },
-      { emoji: "🗃️", label: "Database", ring: 0 },
-      { emoji: "⚡", label: "Zapier", ring: 0 },
-      { emoji: "🔗", label: "Integrations", ring: 1 },
-      { emoji: "🤖", label: "AI Bots", ring: 1 },
-    ],
+    orbit: [],
+    image: imgCrm,
   },
   {
     id: "bookkeeping",
@@ -87,13 +80,8 @@ const services: Service[] = [
     wins: ["Real-time reconciliation", "Anomaly detection", "Always audit-ready"],
     centerImg: imgWallet,
     centerLabel: "Bookkeeping",
-    orbit: [
-      { emoji: "🧾", label: "Receipts", ring: 0 },
-      { emoji: "📋", label: "Audit", ring: 0 },
-      { emoji: "🏦", label: "Banking", ring: 0 },
-      { emoji: "🛡️", label: "Compliance", ring: 1 },
-      { emoji: "🧮", label: "Calculator", ring: 1 },
-    ],
+    orbit: [],
+    image: imgBookkeeping,
   },
   {
     id: "recruiting",
@@ -104,13 +92,8 @@ const services: Service[] = [
     wins: ["AI-scored shortlists", "Top 5% on your calendar", "Structured intake calls"],
     centerImg: imgPeople,
     centerLabel: "HR & Recruiting",
-    orbit: [
-      { imgSrc: imgResume, label: "Resume", ring: 0 },
-      { emoji: "🔎", label: "Screening", ring: 0 },
-      { emoji: "📅", label: "Calendar", ring: 0 },
-      { emoji: "🏆", label: "Top Talent", ring: 1 },
-      { emoji: "🤝", label: "Onboarding", ring: 1 },
-    ],
+    orbit: [],
+    image: imgHR,
   },
   {
     id: "lead-gen",
@@ -121,13 +104,8 @@ const services: Service[] = [
     wins: ["AI-enriched CRM data", "24/7 outbound sequences", "Human-verified quality"],
     centerImg: imgTarget,
     centerLabel: "Lead Gen",
-    orbit: [
-      { emoji: "🧲", label: "Attract", ring: 0 },
-      { emoji: "📧", label: "Outreach", ring: 0 },
-      { emoji: "🤖", label: "AI Scraper", ring: 0 },
-      { emoji: "💬", label: "Chatbot", ring: 1 },
-      { emoji: "🗺️", label: "Prospecting", ring: 1 },
-    ],
+    orbit: [],
+    image: imgLeadGen,
   },
   {
     id: "support",
@@ -138,13 +116,8 @@ const services: Service[] = [
     wins: ["Instant tier-1 resolution", "Omnichannel coverage", "Continuously self-improving"],
     centerImg: imgHeadphones,
     centerLabel: "Customer Support",
-    orbit: [
-      { emoji: "💬", label: "Live Chat", ring: 0 },
-      { emoji: "📬", label: "Email", ring: 0 },
-      { emoji: "😊", label: "Satisfaction", ring: 0 },
-      { emoji: "🌍", label: "Global", ring: 1 },
-      { emoji: "🤖", label: "AI Bot", ring: 1 },
-    ],
+    orbit: [],
+    image: imgSupport,
   },
   {
     id: "content",
@@ -155,13 +128,8 @@ const services: Service[] = [
     wins: ["Full content pipeline", "On-brand tone at scale", "You approve, AI ships"],
     centerImg: imgPencil,
     centerLabel: "Content & Social",
-    orbit: [
-      { emoji: "📸", label: "Visuals", ring: 0 },
-      { emoji: "📣", label: "Campaigns", ring: 0 },
-      { emoji: "🗓️", label: "Scheduling", ring: 0 },
-      { emoji: "#️⃣", label: "Hashtags", ring: 1 },
-      { emoji: "🚀", label: "Growth", ring: 1 },
-    ],
+    orbit: [],
+    image: imgContent,
   },
 ];
 
@@ -194,11 +162,21 @@ const ServiceLayer = ({
           style={{ opacity: widgetOpacity, scale: widgetScale }}
           className="order-2 lg:order-2 lg:col-span-5 lg:col-start-8 will-change-transform"
         >
-          <FloatingWidget
-            centerImg={s.centerImg}
-            centerLabel={s.centerLabel}
-            orbit={s.orbit}
-          />
+          {s.image ? (
+            <div className="w-full max-w-[420px] mx-auto aspect-square overflow-hidden rounded-2xl border border-[#E8EAF0] shadow-sm">
+              <img
+                src={s.image}
+                alt={s.centerLabel}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ) : (
+            <FloatingWidget
+              centerImg={s.centerImg}
+              centerLabel={s.centerLabel}
+              orbit={s.orbit}
+            />
+          )}
         </motion.div>
 
         {/* Text column */}
