@@ -25,15 +25,15 @@ function useOpacityFix(value: MotionValue<number>) {
 const oldWay = [
   "Hiring more staff to cover the workload.",
   "Manual processes that break under volume.",
-  "Automation nobody verifies before it ships.",
+  "Automations nobody verifies before integrating.",
   "Every quarter starts from scratch.",
 ];
 
 const newWay = [
-  "AI-augmented operators do the work of a department.",
-  "A proprietary automation layer moves everything on rails.",
+  "AI augmented operators handling the workload of an entire department.",
+  "A proprietary automation layer maximising efficiency.",
   "Human-in-the-loop QA checks every decision before it ships.",
-  "Systems engineered to absorb 10× volume, not 10× headcount.",
+  "Seamless systems cutting overhead and increasing revenue.",
 ];
 
 const ListItem = ({
@@ -182,7 +182,7 @@ const ValueProps = () => {
                 Before
               </p>
               <p className="font-heading text-xl sm:text-2xl md:text-[28px] font-bold leading-[1.25] mb-5 sm:mb-10" style={{ color: "#A9ACA5" }}>
-                Guessing what actually moves the business.
+                Guessing what will scale your business
               </p>
               <div className="flex flex-col gap-3 sm:gap-6">
                 {oldWay.map((text, i) => (
@@ -205,7 +205,7 @@ const ValueProps = () => {
                 After
               </p>
               <p className="font-heading text-xl sm:text-2xl md:text-[28px] font-bold leading-[1.25] mb-5 sm:mb-10 text-white">
-                Knowing exactly what sets you apart.
+                Seeing results in real time
               </p>
               <div className="flex flex-col gap-3 sm:gap-6">
                 {newWay.map((text, i) => (

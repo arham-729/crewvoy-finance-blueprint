@@ -31,7 +31,7 @@ const services: Service[] = [
     id: "web-dev",
     name: "Web Development",
     augmented:
-      "Operator targets top-tier sites built on Webflow / Framer, uses AI to deconstruct structure and design, and rebuilds a tailored equivalent for your brand at a fraction of agency timelines.",
+      "Operators leverage AI stacks including Framer/Webflow to design and ship websites for your business at industry leading levels.Frontend, backend, and maintenance all handled by Crewvoy.",
     normal: "VA prompts ChatGPT / Claude to spit out a generic site and ships it as-is.",
     wins: ["Agency-quality output", "Fraction of timeline", "Brand-tailored design"],
     centerImg: imgLaptop,
@@ -48,7 +48,7 @@ const services: Service[] = [
     id: "reporting",
     name: "Reporting & Analytics",
     augmented:
-      "Weekly Loom walkthroughs paired with an AI-generated KPI dashboard. Pipeline, conversion, ops health, all visualised. You see the truth, not the narrative.",
+      "Weekly Loom walkthroughs paired with a specialized KPI dashboard. Pipeline, conversion, progress, all visualised. You see unfiltered results.",
     normal: "Random Slack messages and unstructured text reports nobody reads.",
     wins: ["Live KPI dashboards", "Weekly Loom walkthroughs", "Full pipeline visibility"],
     centerImg: imgChart,
@@ -257,26 +257,16 @@ const RolesSection = () => {
     <section id="services" className="section-light">
       {/* Section header */}
       <div className="container-x section-padding pb-0">
-        <div className="grid lg:grid-cols-12 gap-10 mb-4">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <span className="section-label">Services</span>
-            </Reveal>
-            <WordReveal
-              text="The same task. Two very different outcomes."
-              highlight={["different"]}
-              highlightClassName="italic font-light text-[#6B7280]"
-              className="font-heading text-4xl md:text-6xl font-bold text-[#0D1117] leading-[1.05]"
-            />
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9 flex items-end">
-            <Reveal delay={0.2}>
-              <p className="text-[#6B7280] text-base leading-relaxed">
-                Keep scrolling — each service drifts through and its system dissolves
-                into the next. See what a Crewvoy operator delivers versus a typical VA.
-              </p>
-            </Reveal>
-          </div>
+        <div className="mb-4">
+          <Reveal>
+            <span className="section-label">Services</span>
+          </Reveal>
+          <WordReveal
+            text="The same task. Two very different outcomes."
+            highlight={["different"]}
+            highlightClassName="italic font-light text-[#6B7280]"
+            className="font-heading text-4xl md:text-6xl font-bold text-[#0D1117] leading-[1.05]"
+          />
         </div>
       </div>
 

@@ -1,8 +1,8 @@
-import damanLogo from "@/assets/company_logos/daman_transparent.png";
+import damanLogo from "@/assets/company_logos/daman_new_transparent.png";
 import microsoftLogo from "@/assets/company_logos/microsoft_transparent.png";
 import mycoLogo from "@/assets/company_logos/myco_transparent.png";
 import rapidevLogo from "@/assets/company_logos/rapidev_transparent.png";
-import serefinLogo from "@/assets/company_logos/serefin_transparent.png";
+import serefinLogo from "@/assets/company_logos/serefin_new_transparent.png";
 import xtremeLogo from "@/assets/company_logos/xtremetv_transparent.png";
 
 const companies = [
@@ -28,12 +28,12 @@ const Testimonials = () => {
             {[...companies, ...companies, ...companies].map((company, i) => (
               <div
                 key={i}
-                className="flex-shrink-0 mx-10 flex items-center justify-center h-10 rounded-md overflow-hidden transition-transform duration-300 hover:scale-105"
+                className="flex-shrink-0 mx-10 flex items-center justify-center h-20 w-[160px] transition-transform duration-300 hover:scale-105"
               >
                 <img
                   src={company.logo}
                   alt={company.name}
-                  className="h-full max-w-[130px] object-contain"
+                  className="h-full w-full object-contain"
                 />
               </div>
             ))}

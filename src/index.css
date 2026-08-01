@@ -190,7 +190,7 @@
     margin-bottom: 1.25rem;
   }
 
-  .logo-scroll { animation: scroll 30s linear infinite; }
+  .logo-scroll { animation: scroll 14s linear infinite; }
   .animate-fade-up { animation: fadeUp 0.7s ease-out forwards; opacity: 0; }
 
   .no-scrollbar::-webkit-scrollbar { display: none; }
