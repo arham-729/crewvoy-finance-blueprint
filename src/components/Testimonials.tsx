@@ -1,9 +1,9 @@
-import damanLogo from "@/assets/company_logos/daman.jpeg";
-import microsoftLogo from "@/assets/company_logos/microsoft.png";
-import mycoLogo from "@/assets/company_logos/myco.jpeg";
-import rapidevLogo from "@/assets/company_logos/rapidev.jpg";
-import serefinLogo from "@/assets/company_logos/serefin.jpeg";
-import xtremeLogo from "@/assets/company_logos/Xtremetv.jpg";
+import damanLogo from "@/assets/company_logos/daman_transparent.png";
+import microsoftLogo from "@/assets/company_logos/microsoft_transparent.png";
+import mycoLogo from "@/assets/company_logos/myco_transparent.png";
+import rapidevLogo from "@/assets/company_logos/rapidev_transparent.png";
+import serefinLogo from "@/assets/company_logos/serefin_transparent.png";
+import xtremeLogo from "@/assets/company_logos/xtremetv_transparent.png";
 
 const companies = [
   { id: 1, name: "Daman", logo: damanLogo },
@@ -33,7 +33,7 @@ const Testimonials = () => {
                 <img
                   src={company.logo}
                   alt={company.name}
-                  className="h-full max-w-[130px] object-contain mix-blend-multiply"
+                  className="h-full max-w-[130px] object-contain"
                 />
               </div>
             ))}
